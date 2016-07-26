@@ -39,35 +39,39 @@ module.exports = function(passport) {
 
         process.nextTick(function() {
 
-        // checkear que el user ya exitste
-        User.findOne({ 'local.email' :  email }, function(err, user) {
-            // si hay errores, devolver el error
-            if (err)
-                return done(err);
+        // checkear si el password y password* es el mismo
+        if(password ===  req.param('password_0')){
 
-            // si existe, entonces devolver un mensaje por flash al signupMessage
-            if (user) {
-                return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
-            } else {
+          // checkear que el user ya exitste
+          User.findOne({ 'local.email' :  email }, function(err, user) {
+              // si hay errores, devolver el error
+              if (err)
+                  return done(err);
 
-                // Si no hay, entonces creamos el usuario
-                var newUser            = new User();
+              // si existe, entonces devolver un mensaje por flash al signupMessage
+              if (user) {
+                  return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
+              } else {
 
-                // ingresamos los valores del usuario
-                newUser.local.email    = email;
-                newUser.local.password = newUser.generateHash(password);
-                newUser.local.user_type = req.param('user_type');
+                  // Si no hay, entonces creamos el usuario
+                  var newUser            = new User();
 
-                // guardamos el usuario
-                newUser.save(function(err) {
-                    if (err)
-                        throw err;
-                    return done(null, newUser);
-                });
-            }
+                  // ingresamos los valores del usuario
+                  newUser.local.email    = email;
+                  newUser.local.password = newUser.generateHash(password);
+                  newUser.local.user_type = req.param('user_type');
 
-        });
-
+                  // guardamos el usuario
+                  newUser.save(function(err) {
+                      if (err)
+                          throw err;
+                      return done(null, newUser);
+                  });
+              }
+            });
+          } else {
+            return done(null, false, req.flash('signupMessage', 'Verificar password ingresado'));
+          }
         });
 
     }));
