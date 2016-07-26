@@ -1,0 +1,45 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Symthomap</title>
+    <style>
+      html, body {
+        height: 85%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class = "text-right"> <strong><%= user.local.email %></strong> </div>
+    <div class = "text-right"> <a href="/logout" class="btn btn-warning btn-lg">Logout</a></div>
+    <div class="page-header text-center">
+        <h1><span class="fa fa-tachometer"></span> Dashboard <%= user.local.usuario_tipo %> </h1>
+    </div>
+</div>
+  <% if (user.local.usuario_tipo === "Epidemiologo") { %>
+    <div id="map"></div>
+  <% } %>
+    <script>
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 15.7, lng: -92.4},
+        zoom: 8
+      });
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhPyRa40wxABwjLJUkSqRza4aYY4PU1Jk&callback=initMap"
+            async defer></script>
+</body>
+</html>
