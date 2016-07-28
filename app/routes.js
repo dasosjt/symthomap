@@ -1,4 +1,7 @@
 // app/routes.js
+
+var Patient            = require('./models/patient');
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -59,7 +62,24 @@ module.exports = function(app, passport) {
    }));
 
     // procesar ingresar nuevo usuario
-    app.post('/dashboard', function(req, res, next){
+    app.post('/dashboard',function(req, res){
+
+      // creamos al paciente
+      var newPatient = new Patient();
+
+      // ingresamos los valores del paciente
+      newPatient.patient.name = req.param('name');
+      newPatient.patient.email = req.param('email');
+      newPatient.patient.dir = req.param('dir');
+      newPatient.patient.symptoms = req.param('symptoms');
+
+      // guardamos el usuario
+      newPatient.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.redirect('/dashboard');
+      });
 
     });
 };

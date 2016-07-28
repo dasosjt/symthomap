@@ -16,4 +16,4 @@ var patientSchema = mongoose.Schema({
 
 
 // crear modelo de DB y pasar al app
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Patient', patientSchema);
