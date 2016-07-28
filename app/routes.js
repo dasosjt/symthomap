@@ -57,6 +57,11 @@ module.exports = function(app, passport) {
      failureRedirect : '/login', // redirige a login por el error
      failureFlash : true // permitir flash messages
    }));
+
+    // procesar ingresar nuevo usuario
+    app.post('/dashboard', function(req, res, next){
+
+    });
 };
 
 // verificar si esta logeado

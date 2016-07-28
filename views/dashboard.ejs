@@ -30,6 +30,32 @@
   <% if (user.local.user_type === "Epidemiologo") { %>
     <div id="map"></div>
   <% } %>
+
+  <% if (user.local.user_type === "Médico") { %>
+    <div class="col-sm-6 col-sm-offset-3">
+      <h3> Crear Usuario </h3> <br>
+      <form action="/dashboard" method="post">
+          <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" class="form-control" name="name">
+          </div>
+          <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" name="email">
+          </div>
+          <div class="form-group">
+              <label>Dirección</label>
+              <input type="text" class="form-control" name="dir">
+          </div>
+          <div class="form-group">
+              <label>Sintomas</label>
+              <input type="text" class="form-control" name="dir">
+          </div>
+          <button type="submit" class="btn btn-warning btn-lg">Crear Paciente</button>
+      </form>
+    </div>
+  <% } %>
+
     <script>
     var map;
     function initMap() {
