@@ -62,26 +62,7 @@ module.exports = function(app, passport) {
    }));
 
     // procesar ingresar nuevo usuario
-    app.post('/dashboard',function(req, res){
-
-      // creamos al paciente
-      var newPatient = new Patient();
-
-      // ingresamos los valores del paciente
-      newPatient.patient.name = req.param('name');
-      newPatient.patient.email = req.param('email');
-      newPatient.patient.dir = req.param('dir');
-      newPatient.patient.symptoms = req.param('symptoms');
-
-      // guardamos el usuario
-      newPatient.save(function(err) {
-        if (err)
-          res.send(err);
-
-        res.redirect('/dashboard');
-      });
-
-    });
+    app.post('/dashboard',createPatient);
 };
 
 // verificar si esta logeado
@@ -93,4 +74,24 @@ function isLoggedIn(req, res, next) {
 
     // si no esta, entonces redirigir al home
     res.redirect('/');
+}
+
+function createPatient(req, res, next) {
+
+  // creamos al paciente
+  var newPatient = new Patient();
+
+  // ingresamos los valores del paciente
+  newPatient.patient.name = req.param('name');
+  newPatient.patient.email = req.param('email');
+  newPatient.patient.dir = req.param('dir');
+  newPatient.patient.symptoms = req.param('symptoms');
+
+  // guardamos el usuario
+  newPatient.save(function(err) {
+    if (err)
+      res.send(err);
+
+    res.redirect('/dashboard');
+  });
 }
