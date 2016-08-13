@@ -24,7 +24,7 @@ require('./config/passport')(passport); // configurar passport
 app.use(morgan('dev')); // log cada request a la consola
 app.use(cookieParser()); // leer cookies, sirve para la autentificacion
 app.use(bodyParser()); // obtener informacion de los forms de html
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs'); // set up ejs
 
 // requerido por passport
