@@ -1,0 +1,20 @@
+{
+  "name": "symthomap",
+  "description": "App utilizada para Ingenieria de Software",
+  "main": "server.js",
+  "authors": [
+    "Diego Sosa <diego.stt@live.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Link-djst/symthomap",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
