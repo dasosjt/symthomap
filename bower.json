@@ -1,7 +1,6 @@
 {
   "name": "symthomap",
   "description": "App utilizada para Ingenieria de Software",
-  "main": "server.js",
   "authors": [
     "Diego Sosa <diego.stt@live.com>"
   ],
