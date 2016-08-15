@@ -7,8 +7,8 @@ module.exports = function(app, passport) {
     // =====================================
     // HOME PAGE  ==========================
     // =====================================
-    app.get('/', function(req, res) {
-        res.render('../public/index.ejs'); // cargar index.ejs
+    app.get('*', function(req, res) {
+        res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
 
     // =====================================
