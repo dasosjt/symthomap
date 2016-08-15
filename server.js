@@ -25,6 +25,21 @@ app.use(morgan('dev')); // log cada request a la consola
 app.use(cookieParser()); // leer cookies, sirve para la autentificacion
 app.use(bodyParser()); // obtener informacion de los forms de html
 
+// parse application/json
+app.use(bodyParser.json());
+
+// parse application/vnd.api+json as json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
+app.use(methodOverride('X-HTTP-Method-Override'));
+
+// set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + '/public'));
+
 /*app.set('view engine', 'ejs'); // set up ejs*/ //No lo usaremos debido a angular
 
 // requerido por passport
