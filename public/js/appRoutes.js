@@ -11,8 +11,8 @@
 
 
         .when('/login', {
-            templateUrl: 'views/nerd.html',
-            controller: 'NerdController'
+            templateUrl: 'views/login.html',
+            controller: 'loginController'
         });
 
     $locationProvider.html5Mode(true);
