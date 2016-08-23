@@ -6,7 +6,7 @@
 
         .when('/', {
             templateUrl: 'views/home.html',
-            controller: 'MainController'
+            controller: 'PhoneListController'
         })
 
 
