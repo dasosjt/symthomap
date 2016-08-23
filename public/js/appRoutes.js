@@ -12,7 +12,7 @@
 
         .when('/login', {
             templateUrl: 'views/login.html',
-            controller: 'loginController'
+            controller: 'LoginController'
         });
 
     $locationProvider.html5Mode(true);
