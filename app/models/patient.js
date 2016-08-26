@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var patientSchema = mongoose.Schema({
 
     patient            : {
+        idpatient    : String,
         name         : String,
         email        : String,
         dir          : String,
