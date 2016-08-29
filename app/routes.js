@@ -10,6 +10,7 @@ module.exports = function(app, passport) {
     // HOME PAGE  ==========================
     // =====================================
     app.get('*', function(req, res) {
+        console.log("SQL test1");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
 
@@ -64,7 +65,7 @@ module.exports = function(app, passport) {
    }));
    //Llamando BD prueba
    app.get('/get', function(req, res) {
-     console.log("SQL test");
+     console.log("SQL test2");
      sql.connect(config, function (err) {
 
        if (err) console.log(err);
