@@ -77,6 +77,7 @@ module.exports = function(app, passport) {
            if (err) console.log(err)
 
            // send records as a response
+           console.log(recordset);
            res.send(recordset);
 
        });
