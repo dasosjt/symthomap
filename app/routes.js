@@ -64,6 +64,7 @@ module.exports = function(app, passport) {
    }));
    //Llamando BD prueba
    app.get('/get', function(req, res) {
+     console.log("SQL test");
      sql.connect(config, function (err) {
 
        if (err) console.log(err);
