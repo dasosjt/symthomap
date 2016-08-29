@@ -7,14 +7,19 @@ var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
-var sql = require('mssql'); 
+var sql      = require('mssql');
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 var configDB = require('./config/database.js');
-
+var config = {
+        user: 'u234902799_jhon',
+        password: 'jhonjacobs',
+        server: 'mysql.hostinger.es',
+        database: 'u234902799_stmp'
+    };
 // configuracion de mongoDB y passport =========================================
 mongoose.connect(configDB.url); // conexion a db
 

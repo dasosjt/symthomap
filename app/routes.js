@@ -1,7 +1,9 @@
 // app/routes.js
 
 var Patient            = require('./models/patient');
-
+var sql      = require('mssql');
+var express  = require('express');
+var app      = express();
 module.exports = function(app, passport) {
 
     // =====================================
@@ -60,7 +62,28 @@ module.exports = function(app, passport) {
      failureRedirect : '/login', // redirige a login por el error
      failureFlash : true // permitir flash messages
    }));
+   //Llamando BD prueba
+   app.get('/get', function(req, res) {
+     sql.connect(config, function (err) {
 
+       if (err) console.log(err);
+
+       // create Request object
+       var request = new sql.Request();
+
+       // query to the database and get the records
+       request.query('select * from patient', function (err, recordset) {
+
+           if (err) console.log(err)
+
+           // send records as a response
+           res.send(recordset);
+
+       });
+   });
+
+
+   });
     // procesar ingresar nuevo usuario
     app.post('/dashboard',createPatient);
 };
