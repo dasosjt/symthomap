@@ -86,7 +86,7 @@ module.exports = function(app, passport) {
         console.log('Connected as id ' + con.threadId);
         });
 
-      connection.query('SELECT * FROM heroku_03080da74f6c5f8.patient;', function(err, rows, fields) {
+      con.query('SELECT * FROM heroku_03080da74f6c5f8.patient;', function(err, rows, fields) {
         if (err) throw err;
 
         console.log('Patient: ', rows[0].solution);
