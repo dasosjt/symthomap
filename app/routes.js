@@ -74,7 +74,7 @@ module.exports = function(app, passport) {
      failureRedirect : '/login', // redirige a login por el error
      failureFlash : true // permitir flash messages
    }));
-   
+
    //Llamando BD prueba
    app.get('/get', function(req, res) {
       con.connect(function(err){
@@ -85,6 +85,12 @@ module.exports = function(app, passport) {
         console.log('Connection established');
         console.log('Connected as id ' + con.threadId);
         });
+
+      connection.query('SELECT * FROM heroku_03080da74f6c5f8.patient;', function(err, rows, fields) {
+        if (err) throw err;
+
+        console.log('Patient: ', rows[0].solution);
+      });
 
       con.end(function(err) {
         // The connection is terminated gracefully
