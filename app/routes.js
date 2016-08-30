@@ -89,7 +89,7 @@ module.exports = function(app, passport) {
       con.query('SELECT * FROM heroku_03080da74f6c5f8.patient;', function(err, rows, fields) {
         if (err) throw err;
 
-        console.log('Patient: ', rows[0].solution);
+        console.log('Patient: ', rows[0]);
       });
 
       con.end(function(err) {
