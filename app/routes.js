@@ -70,19 +70,7 @@ module.exports = function(app, passport) {
    //Llamando BD prueba
    app.get('/get', function(req, res) {
      console.log("SQL test2");
-     DATABASE_URL = ' postgres://bltkbkkzpemzbu:lekDmhOtiDD3hrMFOkTkb1epeO@ec2-174-129-223-35.compute-1.amazonaws.com:5432/d143f593aj79kp';
-     pg.defaults.ssl = true;
-     pg.connect(process.env.DATABASE_URL, function(err, client) {
-       if (err) throw err;
-       console.log('Connected to postgres! Getting schemas...');
-
-       client
-        .query('SELECT table_schema,table_name FROM information_schema.tables;')
-        .on('row', function(row) {
-          console.log(JSON.stringify(row));
-        });
-    });
-     /*sql.connect("postgres://bltkbkkzpemzbu:lekDmhOtiDD3hrMFOkTkb1epeO@ec2-174-129-223-35.compute-1.amazonaws.com:5432/d143f593aj79kp").then(function() {
+     sql.connect("mysql://sxim200clol2i5t2:p1ne6a460o5srqws@d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/oc3x3xzftzej2obt?sslca=rds-combined-ca-bundle.pem&ssl-verify-server-cert").then(function() {
        // Query
        new sql.Request().query('select * from patient').then(function(recordset) {
            console.log(recordset);
@@ -90,7 +78,7 @@ module.exports = function(app, passport) {
            // ... query error checks
            console.log(err);
        });
-     });*/
+     });
    });
     // procesar ingresar nuevo usuario
     app.post('/dashboard',createPatient);
