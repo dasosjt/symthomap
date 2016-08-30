@@ -70,32 +70,18 @@ module.exports = function(app, passport) {
    //Llamando BD prueba
    app.get('/get', function(req, res) {
      console.log("SQL test2");
-<<<<<<< HEAD
-     sql.connect("mysql://sxim200clol2i5t2:p1ne6a460o5srqws@d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/oc3x3xzftzej2obt").then(function() {
-=======
-     DATABASE_URL = ' postgres://bltkbkkzpemzbu:lekDmhOtiDD3hrMFOkTkb1epeO@ec2-174-129-223-35.compute-1.amazonaws.com:5432/d143f593aj79kp';
      pg.defaults.ssl = true;
+     DATABASE_URL = "postgres://futukkkcgxaypl:wZbBkSbxjaOmTQ1--IiNLGhxix@ec2-54-235-155-172.compute-1.amazonaws.com:5432/d84l1v8fih4kt";
      pg.connect(process.env.DATABASE_URL, function(err, client) {
-       if (err) throw err;
-       console.log('Connected to postgres! Getting schemas...');
+        if (err) throw err;
+        console.log('Connected to postgres! Getting schemas...');
 
-       client
-        .query('SELECT table_schema,table_name FROM information_schema.tables;')
-        .on('row', function(row) {
-          console.log(JSON.stringify(row));
-        });
-    });
-     /*sql.connect("postgres://bltkbkkzpemzbu:lekDmhOtiDD3hrMFOkTkb1epeO@ec2-174-129-223-35.compute-1.amazonaws.com:5432/d143f593aj79kp").then(function() {
->>>>>>> parent of 016330a... mssql 3.3.0
-       // Query
-       console.log("Connection done.... now queries");
-       new sql.Request().query('select * from patient').then(function(recordset) {
-           console.log(recordset);
-       }).catch(function(err) {
-           // ... query error checks
-           console.log(err);
-       });
-     });*/
+        client
+          .query('SELECT table_schema,table_name FROM information_schema.tables;')
+          .on('row', function(row) {
+            console.log(JSON.stringify(row));
+          });
+      });
    });
     // procesar ingresar nuevo usuario
     app.post('/dashboard',createPatient);
