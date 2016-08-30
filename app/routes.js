@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
 
     // =====================================
     // HOME PAGE  ==========================
-    // =====================================
+    // ===============================  ======
     app.get('/', function(req, res) {
         console.log("GET /");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
@@ -73,7 +73,7 @@ module.exports = function(app, passport) {
      var config = {
              user: 'u234902799_jhon',
              password: 'jhonjacobs',
-             server: 'mysql.hostinger.es',
+             server: 'http://sql12.hostinger.es/',
              database: 'u234902799_stmp'
            };
      sql.connect(config, function (err) {
