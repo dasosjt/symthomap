@@ -90,7 +90,6 @@ module.exports = function(app, passport) {
         // before sending a COM_QUIT packet to the MySQL server.
       });*/
       con.end();
-      console.log('Connection terminated');
 
    });
     // procesar ingresar nuevo usuario
