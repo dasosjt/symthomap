@@ -1,7 +1,7 @@
 // app/routes.js
 
-var Patient            = require('./models/patient');
-var pg      = require('pg');
+var Patient       = require('./models/patient');
+var mysql      = require('mysql');
 var express  = require('express');
 var app      = express();
 module.exports = function(app, passport) {
@@ -69,19 +69,27 @@ module.exports = function(app, passport) {
    }));
    //Llamando BD prueba
    app.get('/get', function(req, res) {
-     console.log("SQL test2");
-     pg.defaults.ssl = true;
-     DATABASE_URL = " postgres://xcpwzeimenunju:AyTgK9bc7UcoteKzZqhmVasLCw@ec2-54-235-155-172.compute-1.amazonaws.com:5432/df26al2qv1cunp";
-     pg.connect(process.env.DATABASE_URL, function(err, client) {
-        if (err) throw err;
-        console.log('Connected to postgres! Getting schemas...');
-
-        client
-          .query('SELECT table_schema,table_name FROM information_schema.tables;')
-          .on('row', function(row) {
-            console.log(JSON.stringify(row));
-          });
+     console.log("////-------------MYSQL---------------/////");
+     var con = mysql.createConnection({
+        host: "localhost",
+        user: "jay",
+        password: "jay"
       });
+
+      con.connect(function(err){
+        if(err){
+          console.log('Error connecting to Db');
+          return;
+        }
+        console.log('Connection established');
+        });
+
+        con.end(function(err) {
+        // The connection is terminated gracefully
+        // Ensures all previously enqueued queries are still
+        // before sending a COM_QUIT packet to the MySQL server.
+        });
+
    });
     // procesar ingresar nuevo usuario
     app.post('/dashboard',createPatient);
