@@ -1,7 +1,7 @@
 // app/routes.js
 
 var Patient            = require('./models/patient');
-var pg      = require('pg');
+var sql      = require('mssql');
 var express  = require('express');
 var app      = express();
 module.exports = function(app, passport) {
