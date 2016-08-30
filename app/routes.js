@@ -69,7 +69,6 @@ module.exports = function(app, passport) {
    }));
    //Llamando BD prueba
    app.get('/get', function(req, res) {
-     console.log("////-------------MYSQL---------------/////");
      var con = mysql.createConnection({
         host: "us-cdbr-iron-east-04.cleardb.net",
         database: "heroku_03080da74f6c5f8",
@@ -85,11 +84,13 @@ module.exports = function(app, passport) {
         console.log('Connection established');
         });
 
-        con.end(function(err) {
+        /*con.end(function(err) {
         // The connection is terminated gracefully
         // Ensures all previously enqueued queries are still
         // before sending a COM_QUIT packet to the MySQL server.
-        });
+      });*/
+      con.end();
+      console.log('Connection terminated');
 
    });
     // procesar ingresar nuevo usuario
