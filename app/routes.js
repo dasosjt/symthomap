@@ -82,6 +82,7 @@ module.exports = function(app, passport) {
           return;
         }
         console.log('Connection established');
+        console.log('Connected as id ' + con.threadId);
         });
 
         /*con.end(function(err) {
