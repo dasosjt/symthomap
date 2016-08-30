@@ -77,26 +77,14 @@ module.exports = function(app, passport) {
              database: 'u234902799_stmp',
              port: 3306,
            };
-     sql.connect(config, function (err) {
-
-       if (err) console.log(err);
-
-       // create Request object
-       var request = new sql.Request();
-
-       // query to the database and get the records
-       request.query('select * from patient', function (err, recordset) {
-
-           if (err) console.log(err)
-
-           // send records as a response
-           console.log(recordset);
-           res.send(recordset);
-
-       });
-   });
-
-
+     sql.connect("mssql://u234902799_jhon:jhonjacobs@https://mysql.hostinger.es/u234902799_stmp").then(function() {
+     // Query
+     new sql.Request().query('select * from patient').then(function(recordset) {
+         console.log(recordset);
+     }).catch(function(err) {
+         // ... query error checks
+         console.log(err);
+     });
    });
     // procesar ingresar nuevo usuario
     app.post('/dashboard',createPatient);
