@@ -71,10 +71,10 @@ module.exports = function(app, passport) {
    app.get('/get', function(req, res) {
      console.log("////-------------MYSQL---------------/////");
      var con = mysql.createConnection({
-        host: "sql12.hostinger.es",
-        database: "u234902799_stmp",
-        user: "u234902799_jhon",
-        password: "jhonjacobs"
+        host: "us-cdbr-iron-east-04.cleardb.net",
+        database: "heroku_03080da74f6c5f8",
+        user: "b3e57dbbcff155",
+        password: "34489aa6"
       });
 
       con.connect(function(err){
