@@ -72,7 +72,7 @@ module.exports = function(app, passport) {
      console.log("////-------------MYSQL---------------/////");
      var con = mysql.createConnection({
         host: "mysql.hostinger.es",
-        database: "u234902799_stmp"
+        database: "u234902799_stmp",
         user: "u234902799_jhon",
         password: "jhonjacobs",
         port: "3306"
