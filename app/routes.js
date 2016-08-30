@@ -75,7 +75,7 @@ module.exports = function(app, passport) {
              password: 'jhonjacobs',
              server: 'http://sql12.hostinger.es/',
              database: 'u234902799_stmp',
-             port: '3306',
+             port: 3306,
            };
      sql.connect(config, function (err) {
 
