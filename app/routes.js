@@ -70,7 +70,7 @@ module.exports = function(app, passport) {
    //Llamando BD prueba
    app.get('/get', function(req, res) {
      console.log("SQL test2");
-     sql.connect("mysql://sxim200clol2i5t2:p1ne6a460o5srqws@d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/oc3x3xzftzej2obt?sslca=rds-combined-ca-bundle.pem&ssl-verify-server-cert").then(function() {
+     sql.connect("mysql://sxim200clol2i5t2:p1ne6a460o5srqws@d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/oc3x3xzftzej2obt").then(function() {
        // Query
        console.log("Connection done.... now queries");
        new sql.Request().query('select * from patient').then(function(recordset) {
