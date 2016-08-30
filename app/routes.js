@@ -70,6 +70,12 @@ module.exports = function(app, passport) {
    //Llamando BD prueba
    app.get('/get', function(req, res) {
      console.log("SQL test2");
+     var config = {
+             user: 'u234902799_jhon',
+             password: 'jhonjacobs',
+             server: 'mysql.hostinger.es',
+             database: 'u234902799_stmp'
+           };
      sql.connect(config, function (err) {
 
        if (err) console.log(err);
