@@ -9,8 +9,12 @@ module.exports = function(app, passport) {
     // =====================================
     // HOME PAGE  ==========================
     // =====================================
-    app.get('*', function(req, res) {
-        console.log("SQL test1");
+    app.get('/', function(req, res) {
+        console.log("GET /");
+        res.sendfile('./public/views/index.html'); // cargar index html para Angular
+    });
+    app.get('/nerds', function(req, res) {
+        console.log("GET NERDS");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
 
