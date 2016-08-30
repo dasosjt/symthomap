@@ -4,11 +4,18 @@ var Patient       = require('./models/patient');
 var mysql      = require('mysql');
 var express  = require('express');
 var app      = express();
+
 module.exports = function(app, passport) {
+    var con = mysql.createConnection({
+       host: "us-cdbr-iron-east-04.cleardb.net",
+       database: "heroku_03080da74f6c5f8",
+       user: "b3e57dbbcff155",
+       password: "34489aa6"
+    });
 
     // =====================================
-    // HOME PAGE  ==========================
-    // ===============================  ======
+    // ANGULAR ROUTES  =====================
+    // =====================================
     app.get('/', function(req, res) {
         console.log("GET /");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
@@ -67,15 +74,9 @@ module.exports = function(app, passport) {
      failureRedirect : '/login', // redirige a login por el error
      failureFlash : true // permitir flash messages
    }));
+   
    //Llamando BD prueba
    app.get('/get', function(req, res) {
-     var con = mysql.createConnection({
-        host: "us-cdbr-iron-east-04.cleardb.net",
-        database: "heroku_03080da74f6c5f8",
-        user: "b3e57dbbcff155",
-        password: "34489aa6"
-      });
-
       con.connect(function(err){
         if(err){
           console.log('Error connecting to Db');
@@ -85,14 +86,13 @@ module.exports = function(app, passport) {
         console.log('Connected as id ' + con.threadId);
         });
 
-        /*con.end(function(err) {
+      con.end(function(err) {
         // The connection is terminated gracefully
         // Ensures all previously enqueued queries are still
         // before sending a COM_QUIT packet to the MySQL server.
-      });*/
-      con.end();
-
+      });
    });
+
     // procesar ingresar nuevo usuario
     app.post('/dashboard',createPatient);
 };
