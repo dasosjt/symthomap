@@ -61,14 +61,14 @@ module.exports = function(passport) {
             });
 
             var existencia = false;
-            
+
             con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
               console.log(rows);
             if(rows[0].email != undefined){
               console.log('Usuario si existe');
 
             }else{
-              var post = { name : rows[1], email: rows[0], password: rows[2]};
+              var post = { name : rows[0].name, email: rows[0].email, password: rows[0].password};
               connection.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES (?,?, ?, 0);", post,function(err, result) {
                     // NeatoMOFO!
                 });
