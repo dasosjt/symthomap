@@ -62,7 +62,7 @@ module.exports = function(passport) {
 
           con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
             if (err) throw err;
-            if(rows[0].email == email){
+            if(rows[0].email != undefined){
               console.log('Usuario si existe');
             }
           });
