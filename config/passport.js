@@ -64,11 +64,11 @@ module.exports = function(passport) {
 
             con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
               console.log(rows);
-            if(rows[0].email != undefined){
+            if(rows.length != 0){
               console.log('Usuario si existe');
 
             }else{
-              var post = { name : rows[0].name, email: rows[0].email, password: rows[0].password};
+              var post = { name:  req.param('name') , email: email, password: password};
               connection.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES (?,?, ?, 0);", post,function(err, result) {
                     // NeatoMOFO!
                 });
