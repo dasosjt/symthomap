@@ -28,10 +28,10 @@ module.exports = function(app, passport) {
     // =====================================
     // LOGIN ===============================
     // =====================================
-    app.get('/login', function(req, res) {
+    /*app.get('/login', function(req, res) {
         // cargar login.ejs y pasar mensajes por flash hacia loginMessage
         res.render('login.ejs', { message: req.flash('loginMessage') });
-    });
+    });*/
 
     // =====================================
     // SIGNUP ==============================
@@ -62,11 +62,14 @@ module.exports = function(app, passport) {
     });
 
     // procesar el signup form
-    app.post('/signup', passport.authenticate('local-signup', {
+    app.post('/signup', function(req, res) {
+        console.log(req);
+    });
+     /*passport.authenticate('local-signup', {
         successRedirect : '/dashboard', // redirigir al dashboard
         failureRedirect : '/signup', // redirige a signup por el error
         failureFlash : true // permitir flash messages
-    }));
+    }));*/
 
     // procesar login form
     app.post('/login', passport.authenticate('local-login', {
