@@ -67,8 +67,8 @@ module.exports = function(passport) {
           con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
             if (err) throw err;
 
-            console.log('Patient: ', fields);
-            return done(null, fields);
+            console.log('Rows: ', rows);
+            console.log('Fields: ', fields);
           });
 
           con.end(function(err) {
