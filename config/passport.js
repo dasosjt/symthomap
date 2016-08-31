@@ -47,10 +47,6 @@ module.exports = function(passport) {
            user: "b3e57dbbcff155",
            password: "34489aa6"
         });
-        console.log(req);
-        console.log(email);
-        console.log(password);
-
         // checkear si el password y password* es el mismo
         if(password ===  req.param('password_0')){
 
