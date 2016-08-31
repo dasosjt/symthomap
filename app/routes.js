@@ -66,7 +66,7 @@ module.exports = function(app, passport) {
         successRedirect : '/dashboard', // redirigir al dashboard
         failureRedirect : '/signup', // redirige a signup por el error
         failureFlash : true // permitir flash messages
-    }));*/
+    }));
 
     // procesar login form
     app.post('/login', passport.authenticate('local-login', {
