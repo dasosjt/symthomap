@@ -9,14 +9,15 @@ angular.module('NerdService', []).factory('Nerd', ['$http', function($http) {
         },
 
 
-       
+
         //llamada al metodo POST de PHP por medio de angular
         create : function(nerdData) {
-            return $http.post('/api/nerds', nerdData);
+            console.log(nerdData);
+            return $http.post('/signup', nerdData);
         },
 
-        
-        
+
+
         //llamada al metodo DELETE  de PHP por medio de angular
         delete : function(id) {
             return $http.delete('/api/nerds/' + id);
