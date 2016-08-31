@@ -41,6 +41,12 @@ module.exports = function(passport) {
     function(req, email, password, done) {
 
         process.nextTick(function() {
+        var con = mysql.createConnection({
+           host: "us-cdbr-iron-east-04.cleardb.net",
+           database: "heroku_03080da74f6c5f8",
+           user: "b3e57dbbcff155",
+           password: "34489aa6"
+        });
         console.log(req);
         console.log(email);
         console.log(password);
@@ -49,7 +55,26 @@ module.exports = function(passport) {
         if(password ===  req.param('password_0')){
 
           // checkear que el user ya exitste
-          User.findOne({ 'local.email' :  email }, function(err, user) {
+          con.connect(function(err){
+            if(err){
+              console.log('Error connecting to Db');
+              return;
+            }
+            console.log('Connection established');
+            console.log('Connected as id ' + con.threadId);
+            });
+
+          con.query('SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '+email+';', function(err, rows, fields) {
+            if (err) throw err;
+
+            console.log('Patient: ', fields);
+          });
+
+          con.end(function(err) {
+            console.log(err);
+          });
+
+          /*User.findOne({ 'local.email' :  email }, function(err, user) {
               // si hay errores, devolver el error
               if (err)
                   return done(err);
@@ -74,7 +99,7 @@ module.exports = function(passport) {
                       return done(null, newUser);
                   });
               }
-            });
+            });*/
           } else {
             return done(null, false, req.flash('signupMessage', 'Verificar password ingresado'));
           }
