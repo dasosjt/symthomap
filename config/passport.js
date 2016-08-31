@@ -65,12 +65,13 @@ module.exports = function(passport) {
             if (err) throw err;
             if(rows[0].email != undefined){
               console.log('Usuario si existe');
-            }else{
               existencia = true;
             }
-            console.log('Usuario no existe');
-            console.log(existencia);
+
           });
+
+          console.log('Usuario no existe');
+          console.log(existencia);
 
           con.end(function(err) {
             console.log(err);
