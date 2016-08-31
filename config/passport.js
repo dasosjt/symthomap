@@ -68,7 +68,7 @@ module.exports = function(passport) {
             }else{
               existencia = true;
             }
-            Console.log('Usuario no existe');
+            console.log('Usuario no existe');
             console.log(existencia);
           });
 
