@@ -61,7 +61,7 @@ module.exports = function(passport) {
             });
 
             var existencia = false;
-            if (err) throw err;
+            
             con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
               console.log(rows);
             if(rows[0].email != undefined){
