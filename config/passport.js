@@ -45,7 +45,9 @@ module.exports = function(passport) {
            host: "us-cdbr-iron-east-04.cleardb.net",
            database: "heroku_03080da74f6c5f8",
            user: "b3e57dbbcff155",
-           password: "34489aa6"
+           password: "34489aa6",
+           connectTimeout : 300
+
         });
         // checkear si el password y password* es el mismo
         if(password ===  req.param('password_0')){
@@ -75,9 +77,7 @@ module.exports = function(passport) {
               //console.log(query.sql);
 
             }
-            con.end(function(err) {
-              console.log(err);
-            });
+            con.release();
           });
 
 
