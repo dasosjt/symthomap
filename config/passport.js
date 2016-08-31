@@ -63,13 +63,13 @@ module.exports = function(passport) {
             var existencia = false;
             if (err) throw err;
             con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
-              console.log(rows)
+              console.log(rows);
             if(rows[0].email != undefined){
               console.log('Usuario si existe');
 
             }else{
               var email = rows[0].email;
-              
+
               con.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES ('Koch','koch@gmail.com', 'koch', 0);");
             }
 
