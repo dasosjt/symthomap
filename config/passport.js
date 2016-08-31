@@ -70,7 +70,7 @@ module.exports = function(passport) {
             }else{
               var email = rows[0].email;
 
-              con.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES ('Koch','koch@gmail.com', 'koch', 0);");
+              con.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES ('Koch','koch@gmail.com', 'koch', 0);", function(err,result){});
             }
 
           });
