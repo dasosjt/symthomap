@@ -68,7 +68,7 @@ module.exports = function(passport) {
             if (err) throw err;
 
             console.log('Rows: ', rows);
-            console.log('Rows Size : ', rows[0] );
+            console.log('Rows Size : ', rows[0].email );
 
             if(rows){
               console.log('User exists');
