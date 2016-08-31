@@ -73,11 +73,12 @@ module.exports = function(passport) {
               var post = { name:  req.param('name') , email: email, password: password};
               con.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES (?,?, ?, 0);", post,function(err, result) {
                     // NeatoMOFO!
+                    con.release();
                 });
               //console.log(query.sql);
 
             }
-            con.release();
+
           });
 
 
