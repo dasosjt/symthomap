@@ -6,6 +6,9 @@ var LocalStrategy   = require('passport-local').Strategy;
 // modelo del json
 var User            = require('../app/models/user');
 
+// Cargar modulo para conexion mysql
+var mysql           = require('mysql');
+
 module.exports = function(passport) {
 
     // =========================================================================

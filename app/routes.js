@@ -21,7 +21,7 @@ module.exports = function(app, passport) {
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
     app.get('/login', function(req, res) {
-        console.log("GET NERDS");
+        console.log("GET LOGIN");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
 
