@@ -61,18 +61,20 @@ module.exports = function(passport) {
             });
 
             var existencia = false;
-          con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
             if (err) throw err;
+            con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
+              console.log(rows)
             if(rows[0].email != undefined){
               console.log('Usuario si existe');
-              existencia = true;
-              console.log(existencia);
+
+            }else{
+              var email = rows[0].email;
+              
+              con.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES ('Koch','koch@gmail.com', 'koch', 0);");
             }
 
           });
 
-          console.log('Usuario no existe');
-          console.log(existencia);  
 
           con.end(function(err) {
             console.log(err);
