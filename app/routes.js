@@ -63,7 +63,11 @@ module.exports = function(app, passport) {
 
     // procesar el signup form
     app.post('/signup', function(req, res) {
-        console.log(req.body);
+      var email = req.body.email;
+      var pass = req.body.password;
+
+        console.log(email);
+        console.log(pass);
     });
      /*passport.authenticate('local-signup', {
         successRedirect : '/dashboard', // redirigir al dashboard
