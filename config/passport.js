@@ -60,11 +60,16 @@ module.exports = function(passport) {
             console.log('Connected as id ' + con.threadId);
             });
 
+            var existencia = false;
           con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
             if (err) throw err;
             if(rows[0].email != undefined){
               console.log('Usuario si existe');
+            }else{
+              existencia = true;
             }
+            Console.log('Usuario no existe');
+            console.log(existencia);
           });
 
           con.end(function(err) {
