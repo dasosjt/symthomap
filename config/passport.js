@@ -38,6 +38,9 @@ module.exports = function(passport) {
     function(req, email, password, done) {
 
         process.nextTick(function() {
+        console.log(req);
+        console.log(email);
+        console.log(password);
 
         // checkear si el password y password* es el mismo
         if(password ===  req.param('password_0')){

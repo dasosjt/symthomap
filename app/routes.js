@@ -62,14 +62,7 @@ module.exports = function(app, passport) {
     });
 
     // procesar el signup form
-    app.post('/signup', function(req, res) {
-      var email = req.body.email;
-      var pass = req.body.password;
-
-        console.log(email);
-        console.log(pass);
-    });
-     /*passport.authenticate('local-signup', {
+    app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/dashboard', // redirigir al dashboard
         failureRedirect : '/signup', // redirige a signup por el error
         failureFlash : true // permitir flash messages
