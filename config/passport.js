@@ -73,14 +73,15 @@ module.exports = function(passport) {
                     // NeatoMOFO!
                 });
               //console.log(query.sql);
+
             }
-
+            con.end(function(err) {
+              console.log(err);
+            });
           });
 
 
-          con.end(function(err) {
-            console.log(err);
-          });
+
 
           /*User.findOne({ 'local.email' :  email }, function(err, user) {
               // si hay errores, devolver el error
