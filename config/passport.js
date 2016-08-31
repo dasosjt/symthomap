@@ -72,7 +72,7 @@ module.exports = function(passport) {
               con.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES (?,?, ?, 0);", post,function(err, result) {
                     // NeatoMOFO!
                 });
-              console.log(query.sql);
+              //console.log(query.sql);
             }
 
           });
