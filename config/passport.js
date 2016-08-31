@@ -64,10 +64,11 @@ module.exports = function(passport) {
             console.log('Connected as id ' + con.threadId);
             });
 
-          con.query('SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '+email+';', function(err, rows, fields) {
+          con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
             if (err) throw err;
 
             console.log('Patient: ', fields);
+            return done(null, fields);
           });
 
           con.end(function(err) {
