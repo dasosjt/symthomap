@@ -9,6 +9,9 @@ var User            = require('../app/models/user');
 // Cargar modulo para conexion mysql
 var mysql           = require('mysql');
 
+var dbconfig        = require('../config/databaseSQL.js');
+
+
 module.exports = function(passport) {
 
     // =========================================================================
@@ -39,69 +42,39 @@ module.exports = function(passport) {
         passReqToCallback : true // se envia todo el request
     },
     function(req, email, password, done) {
-
-        process.nextTick(function() {
-        var con = mysql.createConnection({
-           host: "us-cdbr-iron-east-04.cleardb.net",
-           database: "heroku_03080da74f6c5f8",
-           user: "b3e57dbbcff155",
-           password: "34489aa6"
-        });
-        // checkear si el password y password* es el mismo
-        if(password ===  req.param('password_0')){
-
-          // checkear que el user ya exitste
-          con.connect(function(err){
-            if(err){
-              console.log('Error connecting to Db');
-              return;
-            }
-            console.log('Connection established');
-            console.log('Connected as id ' + con.threadId);
-            });
-
-          con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
-            if (err) throw err;
-            if(rows[0].email != undefined){
-              console.log('Usuario si existe');
-            }
-          });
-
-          con.end(function(err) {
-            console.log(err);
-          });
-
-          /*User.findOne({ 'local.email' :  email }, function(err, user) {
-              // si hay errores, devolver el error
-              if (err)
-                  return done(err);
-
-              // si existe, entonces devolver un mensaje por flash al signupMessage
-              if (user) {
-                  return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
-              } else {
-
-                  // Si no hay, entonces creamos el usuario
-                  var newUser            = new User();
-
-                  // ingresamos los valores del usuario
-                  newUser.local.email    = email;
-                  newUser.local.password = newUser.generateHash(password);
-                  newUser.local.user_type = req.param('user_type');
-
-                  // guardamos el usuario
-                  newUser.save(function(err) {
-                      if (err)
-                          throw err;
-                      return done(null, newUser);
-                  });
+      var connection = mysql.createConnection(dbconfig);
+      connection.on('error', function(err) {
+        console.log(err.code); // 'ER_BAD_DB_ERROR'
+      });
+      connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows) {
+        console.log(rows);
+        if (err) {
+          console.log(err);
+          return done(err);
+        };
+        if(rows.length != 0){
+          return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
+        }else{
+          var newUserMysql = new Object();
+          newUserMysql.email = email;
+          newUserMysql.password = password;
+          newUserMysql.name = req.param('name');
+          var post = { name:  req.param('name') , email: email, password: password, 0};
+          connection.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) SET ?;", post,function(err, result) {
+            if (err) {
+              console.log(err);
+              return done(err);
+            };
+            connection.destroy();/*end(function(err) {
+              if (err) {
+                  console.log(err);
+                  return done(null, false, req.flash('signupMessage', 'Conexión a base de datos finalizada'));
               }
             });*/
-          } else {
-            return done(null, false, req.flash('signupMessage', 'Verificar password ingresado'));
-          }
-        });
-
+            return done(null, newUserMysql);
+          });
+        };
+      });
     }));
 
     // =========================================================================

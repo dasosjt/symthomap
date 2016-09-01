@@ -7,7 +7,7 @@ var app      = express();
 
 module.exports = function(app, passport) {
     var con = mysql.createConnection({
-       host: "us-cdbr-iron-east-04.cleardb.net",
+       host: "us-cdbr-iron-east-04.cleardb.net/heroku_db?reconnect=true",
        database: "heroku_03080da74f6c5f8",
        user: "b3e57dbbcff155",
        password: "34489aa6"
@@ -22,6 +22,10 @@ module.exports = function(app, passport) {
     });
     app.get('/login', function(req, res) {
         console.log("GET LOGIN");
+        res.sendfile('./public/views/index.html'); // cargar index html para Angular
+    });
+    app.get('/signup', function(req, res) {
+        console.log("GET SIGNUP");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
 
