@@ -66,8 +66,6 @@ module.exports = function(passport) {
               return done(err);
             };
             connection.destroy();
-
-            s
             return done(null, newUserMysql);
           });
         };
