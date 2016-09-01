@@ -50,6 +50,7 @@ module.exports = function(passport) {
           return done(err);
         };
         if(rows.length != 0){
+          console.log('El correo ingresado ya existe');
           return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
         }else{
           var post = { name:  req.param('name') , email: email, password: password, user_type: 0};
@@ -67,8 +68,7 @@ module.exports = function(passport) {
         newUserMysql.password = password;
         newUserMysql.name = req.param('name');
         return done(null, newUserMysql);
-      });
-    }));
+      }));
 
     // =========================================================================
     // LOCAL LOGIN =============================================================
