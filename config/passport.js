@@ -9,13 +9,8 @@ var User            = require('../app/models/user');
 // Cargar modulo para conexion mysql
 var mysql           = require('mysql');
 
+var dbconfig        = require('./database');
 
-var connection = mysql.createConnection({
-   host: "us-cdbr-iron-east-04.cleardb.net",
-   database: "heroku_03080da74f6c5f8",
-   user: "b3e57dbbcff155",
-   password: "34489aa6",
-});
 
 module.exports = function(passport) {
 
@@ -47,6 +42,7 @@ module.exports = function(passport) {
         passReqToCallback : true // se envia todo el request
     },
     function(req, email, password, done) {
+      var connection = mysql.createConnection(dbconfig);
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows) {
         console.log(rows);
         if (err) return done(err);
