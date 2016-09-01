@@ -45,7 +45,10 @@ module.exports = function(passport) {
       var connection = mysql.createConnection(dbconfig);
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows) {
         console.log(rows);
-        if (err) return done(err);
+        if (err) {
+          console.log(err);
+          return done(err);
+        };
         if(rows.length != 0){
           return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
         }else{
@@ -55,10 +58,15 @@ module.exports = function(passport) {
           newUserMysql.name = req.param('name');
           var post = { name:  req.param('name') , email: email, password: password};
           connection.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES (?,?, ?, 0);", post,function(err, result) {
-            if (err) return done(err);
+            if (err) {
+              console.log(err);
+              return done(err);
+            };
             connection.end(function(err) {
-              if (err) console.log(err);
-              return done(null, false, req.flash('signupMessage', 'Conexión a base de datos finalizada'));
+              if (err) {
+                  console.log(err);
+                  return done(null, false, req.flash('signupMessage', 'Conexión a base de datos finalizada'));
+              }
             });
             return done(null, newUserMysql);
           });
