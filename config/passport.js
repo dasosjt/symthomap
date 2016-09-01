@@ -60,7 +60,10 @@ module.exports = function(passport) {
           var post = { name:  req.param('name') , email: email, password: password};
           connection.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES (?,?, ?, 0);", post,function(err, result) {
             if (err) return done(err);
-            connection.destroy();
+            connection.end(function(err) {
+              if if (err) console.log(err);
+              return done(null, false, req.flash('signupMessage', 'Conexión a base de datos finalizada'));
+            });
             return done(null, newUserMysql);
           });
         };
