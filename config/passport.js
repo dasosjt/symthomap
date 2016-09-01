@@ -9,6 +9,14 @@ var User            = require('../app/models/user');
 // Cargar modulo para conexion mysql
 var mysql           = require('mysql');
 
+
+var connection = mysql.createConnection({
+   host: "us-cdbr-iron-east-04.cleardb.net",
+   database: "heroku_03080da74f6c5f8",
+   user: "b3e57dbbcff155",
+   password: "34489aa6",
+});
+
 module.exports = function(passport) {
 
     // =========================================================================
@@ -39,85 +47,22 @@ module.exports = function(passport) {
         passReqToCallback : true // se envia todo el request
     },
     function(req, email, password, done) {
-
-        process.nextTick(function() {
-        var con = mysql.createConnection({
-           host: "us-cdbr-iron-east-04.cleardb.net",
-           database: "heroku_03080da74f6c5f8",
-           user: "b3e57dbbcff155",
-           password: "34489aa6",
-           acquireTimeout  : 100000,
-           timeout  :  100000,
-
-        });
-        // checkear si el password y password* es el mismo
-        if(password ===  req.param('password_0')){
-
-          // checkear que el user ya exitste
-          con.connect(function(err){
-            if(err){
-              console.log('Error connecting to Db');
-              return;
-            }
-            console.log('Connection established');
-            console.log('Connected as id ' + con.threadId);
-            });
-
-            var existencia = false;
-
-            con.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows, fields) {
-              console.log(rows);
-            if(rows.length != 0){
-              console.log('Usuario si existe');
-
-            }else{
-              var post = { name:  req.param('name') , email: email, password: password};
-              con.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES (?,?, ?, 0);", post,function(err, result) {
-                    // NeatoMOFO!
-                    con.end(function(err) {
-                      console.log(err);
-                    });
-                });
-              //console.log(query.sql);
-
-            }
-
+      connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows) {
+        console.log(rows);
+        if (err) return done(err);
+        if(rows.length != 0){
+          return done(null, false, eq.flash('signupMessage', 'El correo ingresado ya existe'));
+        }else{
+          var newUserMysql = new Object();
+          newUserMysql.email = email;
+          newUserMysql.password = password;
+          newUserMysql.name = req.param('name');
+          var post = { name:  req.param('name') , email: email, password: password};
+          connection.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) VALUES (?,?, ?, 0);", post,function(err, result) {
+            return done(null, newUserMysql);
           });
-
-
-
-
-          /*User.findOne({ 'local.email' :  email }, function(err, user) {
-              // si hay errores, devolver el error
-              if (err)
-                  return done(err);
-
-              // si existe, entonces devolver un mensaje por flash al signupMessage
-              if (user) {
-                  return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
-              } else {
-
-                  // Si no hay, entonces creamos el usuario
-                  var newUser            = new User();
-
-                  // ingresamos los valores del usuario
-                  newUser.local.email    = email;
-                  newUser.local.password = newUser.generateHash(password);
-                  newUser.local.user_type = req.param('user_type');
-
-                  // guardamos el usuario
-                  newUser.save(function(err) {
-                      if (err)
-                          throw err;
-                      return done(null, newUser);
-                  });
-              }
-            });*/
-          } else {
-            return done(null, false, req.flash('signupMessage', 'Verificar password ingresado'));
-          }
-        });
-
+        };
+      });
     }));
 
     // =========================================================================
