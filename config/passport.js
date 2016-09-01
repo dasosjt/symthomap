@@ -65,12 +65,9 @@ module.exports = function(passport) {
               console.log(err);
               return done(err);
             };
-            connection.destroy();/*end(function(err) {
-              if (err) {
-                  console.log(err);
-                  return done(null, false, req.flash('signupMessage', 'Conexión a base de datos finalizada'));
-              }
-            });*/
+            connection.destroy();
+
+            s
             return done(null, newUserMysql);
           });
         };
