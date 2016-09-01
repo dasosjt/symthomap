@@ -43,6 +43,9 @@ module.exports = function(passport) {
     },
     function(req, email, password, done) {
       var connection = mysql.createConnection(dbconfig);
+      connection.on('error', function(err) {
+        console.log(err.code); // 'ER_BAD_DB_ERROR'
+      });
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows) {
         console.log(rows);
         if (err) {
