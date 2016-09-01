@@ -51,7 +51,7 @@ module.exports = function(passport) {
         console.log(rows);
         if (err) return done(err);
         if(rows.length != 0){
-          return done(null, false, eq.flash('signupMessage', 'El correo ingresado ya existe'));
+          return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
         }else{
           var newUserMysql = new Object();
           newUserMysql.email = email;
