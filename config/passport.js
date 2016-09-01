@@ -59,8 +59,8 @@ module.exports = function(passport) {
           newUserMysql.email = email;
           newUserMysql.password = password;
           newUserMysql.name = req.param('name');
-          var post = { name:  req.param('name') , email: email, password: password, 0};
-          connection.query("INSERT INTO heroku_03080da74f6c5f8.user (name, email, password, user_type) SET ?;", post,function(err, result) {
+          var user= {name: req.param('name'), email: email, password: password, user_type: 0};
+          connection.query('INSERT INTO heroku_03080da74f6c5f8.user SET ? ', user, function(err, result) {
             if (err) {
               console.log(err);
               return done(err);
