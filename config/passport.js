@@ -55,12 +55,12 @@ module.exports = function(passport) {
         if(rows.length != 0){
           return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
         }else{
-          console.log(req.param('name'));
+          console.log(req.param('email'));
           var newUserMysql = new Object();
           newUserMysql.email = email;
           newUserMysql.password = password;
           newUserMysql.name = req.param('name');
-          var user= {name: req.param('name'), email: email, password: password, user_type: 0};
+          var user= {name: email, email: email, password: password, user_type: 0};
           connection.query('INSERT INTO heroku_03080da74f6c5f8.user SET ? ', user, function(err, result) {
             if (err) {
               console.log(err);
