@@ -9,7 +9,7 @@ var User            = require('../app/models/user');
 // Cargar modulo para conexion mysql
 var mysql           = require('mysql');
 
-var dbconfig        = require('../config/database.js');
+var dbconfig        = require('../config/databaseSQL.js');
 
 
 module.exports = function(passport) {
