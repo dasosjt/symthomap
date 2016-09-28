@@ -67,7 +67,10 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 
-
+    // =====================================
+    // patient =============================
+    // =====================================
+    // Get all the patients
     app.get('/patient', function(req, res){
       var connection = mysql.createConnection(dbconfig);
       connection.on('error', function(err) {
@@ -76,7 +79,7 @@ module.exports = function(app, passport) {
       var temp;
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
         temp = rows;
-        console.log(rows);
+        console.log(rows.name);
         if (err) {
           console.log(err);
           return done(err);
