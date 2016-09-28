@@ -4,6 +4,8 @@ var Patient       = require('./models/patient');
 var mysql      = require('mysql');
 var express  = require('express');
 var app      = express();
+var mysql           = require('mysql');
+var dbconfig        = require('../config/databaseSQL.js');
 
 module.exports = function(app, passport) {
     var con = mysql.createConnection({
@@ -65,6 +67,24 @@ module.exports = function(app, passport) {
         res.redirect('/');
     });
 
+
+    app.get('/patient', function(req, res){
+      var connection = mysql.createConnection(dbconfig);
+      connection.on('error', function(err) {
+        console.log(err.code); // 'ER_BAD_DB_ERROR'
+      });
+      var temp;
+      connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
+        temp = rows;
+        console.log(rows);
+        if (err) {
+          console.log(err);
+          return done(err);
+        };
+      });
+      res.send(temp);
+
+    });
     // procesar el signup form
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/dashboard', // redirigir al dashboard
