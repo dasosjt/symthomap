@@ -30,6 +30,10 @@ module.exports = function(app, passport) {
         console.log("GET SIGNUP");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
+    app.get('/patient', function(req, res) {
+        console.log("GET SIGNUP");
+        res.sendfile('./public/views/index.html'); // cargar index html para Angular
+    });
 
     // =====================================
     // LOGIN ===============================
@@ -83,8 +87,8 @@ module.exports = function(app, passport) {
         };
       });
       res.send(temp);
-
     });
+
     // procesar el signup form
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/dashboard', // redirigir al dashboard
