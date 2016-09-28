@@ -79,7 +79,7 @@ module.exports = function(app, passport) {
       var temp;
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
         temp = rows;
-        console.log(rows.name);
+        console.log(rows);
         if (err) {
           console.log(err);
           return done(err);
