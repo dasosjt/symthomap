@@ -11,6 +11,7 @@ var mysql           = require('mysql');
 
 var dbconfig        = require('../config/databaseSQL.js');
 
+var connection      = mysql.createConnection(dbconfig);
 
 module.exports = function(passport) {
 
@@ -20,21 +21,16 @@ module.exports = function(passport) {
 
     //serialize el usuario
     passport.serializeUser(function(user, done) {
-        console.log("serialize ", user.email);
+        console.log("serializeUser ", user.email);
         done(null, user.email);
     });
 
     //deserialize el usuario
     passport.deserializeUser(function(email, done) {
-      var connection = mysql.createConnection(dbconfig);
-      console.log("deserialize ", email);
-      connection.on('error', function(err) {
-        console.log(err.code); // 'ER_BAD_DB_ERROR'
-      });
+        console.log("serializeUser ", user.email);
         connection.query("select * from heroku_03080da74f6c5f8.user where email = '"+email+"'",function(err,rows){
             done(err, rows[0]);
         });
-        connection.destroy();
     });
 
     // =========================================================================
@@ -49,10 +45,6 @@ module.exports = function(passport) {
         passReqToCallback : true // se envia todo el request
     },
     function(req, email, password, done) {
-      var connection = mysql.createConnection(dbconfig);
-      connection.on('error', function(err) {
-        console.log(err.code); // 'ER_BAD_DB_ERROR'
-      });
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows) {
         console.log(rows);
         if (err) {
@@ -61,19 +53,18 @@ module.exports = function(passport) {
         };
         if(rows.length != 0){
           return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
-        }else{
+        } else {
           console.log(req.param('email'));
           var newUserMysql = new Object();
           newUserMysql.email = email;
           newUserMysql.password = password;
           newUserMysql.name = req.param('name');
-          var user= {name: email, email: email, password: password, user_type: 0};
+          var user = {name: email, email: email, password: password, user_type: 0};
           connection.query('INSERT INTO heroku_03080da74f6c5f8.user SET ? ', user, function(err, result) {
             if (err) {
               console.log(err);
               return done(err);
             };
-            connection.destroy();
             return done(null, newUserMysql);
           });
         };
@@ -93,29 +84,24 @@ module.exports = function(passport) {
 
     },
     function(req, email, password, done) { // callback con nuestra form
-      var connection = mysql.createConnection(dbconfig);
-      connection.on('error', function(err) {
-        console.log(err.code); // 'ER_BAD_DB_ERROR'
-      });
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE email = '" + email + "'",function(err,rows){
-      if (err)
-                return done(err);
-       if (!rows.length) {
-                console.log("No user found ");
-                return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
-            }
+        if (err) {
+          return done(err);
+        };
+        console.log(rows);
+        console.log("above row object");
+        if (!rows.length) {
+          console.log("No user found ");
+          return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+        };
+        // if the user is found but the password is wrong
+        if (!( rows[0].password == password)){
+            console.log("Wrong password ");
+            return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart')); // create the loginMessage and save it to session as flashdata
+        };
 
-      // if the user is found but the password is wrong
-            if (!( rows[0].password == password))
-                console.log("Wrong password ");
-                return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart')); // create the loginMessage and save it to session as flashdata
-
-            // all is well, return successful user
-            return done(null, rows[0]);
-          connection.destroy();
+        // all is well, return successful user
+        return done(null, rows[0]);
     });
-        // Buscar el email en la base de datos
-
-    }));
-
+  }));
 };
