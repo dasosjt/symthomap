@@ -27,7 +27,7 @@ module.exports = function(passport) {
 
     //deserialize el usuario
     passport.deserializeUser(function(email, done) {
-        console.log("serializeUser ", user.email);
+        console.log("deserializeUser ", email);
         connection.query("select * from heroku_03080da74f6c5f8.user where email = '"+email+"'",function(err,rows){
             done(err, rows[0]);
         });
