@@ -31,9 +31,10 @@ module.exports = function(passport) {
       connection.on('error', function(err) {
         console.log(err.code); // 'ER_BAD_DB_ERROR'
       });
-  		connection.query("select * from heroku_03080da74f6c5f8.user where email = '"+email+"'",function(err,rows){
-  			done(err, rows[0]);
-  		});
+        connection.query("select * from heroku_03080da74f6c5f8.user where email = '"+email+"'",function(err,rows){
+            done(err, rows[0]);
+        });
+        connection.destroy();
     });
 
     // =========================================================================
@@ -111,7 +112,7 @@ module.exports = function(passport) {
 
             // all is well, return successful user
             return done(null, rows[0]);
-
+          connection.destroy();
     });
         // Buscar el email en la base de datos
 
