@@ -85,7 +85,6 @@ module.exports = function(app, passport) {
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
         if(rows){
           if(!rows.length){
-            console.log("Rows get /patient undefined");
           } else {
             temp = rows;
             res.setHeader('Content-Type', 'application/json');
@@ -95,6 +94,8 @@ module.exports = function(app, passport) {
             console.log(err);
             return done(err);
           };
+        } else {
+          console.log("rows of get Patient are undefined");
         }
         connection.destroy();
       });
