@@ -76,8 +76,8 @@ module.exports = function(app, passport) {
       connection.on('error', function(err) {
         console.log(err.code); // 'ER_BAD_DB_ERROR'
       });
-      var temp;
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
+        var temp;
         temp = rows;
         console.log(rows);
         if (err) {
@@ -85,7 +85,7 @@ module.exports = function(app, passport) {
           return done(err);
         };
       });
-      res.send(temp);
+      res.send(temp[0]);
     });
 
     // procesar el signup form
