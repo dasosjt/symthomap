@@ -20,6 +20,7 @@ module.exports = function(passport) {
 
     //serialize el usuario
     passport.serializeUser(function(user, done) {
+        console.log("HELODOSAPFKDSPFJSPAJFPSKDFPDSKFPSDF")
         done(null, user.email);
     });
 
