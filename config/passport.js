@@ -58,8 +58,8 @@ module.exports = function(passport) {
           var newUserMysql = new Object();
           newUserMysql.email = email;
           newUserMysql.password = password;
-          newUserMysql.name = req.param('name');
-          var user = {name: email, email: email, password: password, user_type: 0};
+          newUserMysql.user_type = req.param('user_type');
+          var user = {name: email, email: email, password: password, user_type: req.param('user_type')};
           connection.query('INSERT INTO heroku_03080da74f6c5f8.user SET ? ', user, function(err, result) {
             if (err) {
               console.log(err);
@@ -92,15 +92,15 @@ module.exports = function(passport) {
         console.log("above row object");
         if (!rows.length) {
           console.log("No user found ");
-          return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+          return done(null, false, req.flash('loginMessage', 'No user found.'));
         };
-        // if the user is found but the password is wrong
+        // Si el usuario se encuentra pero el password es incorrecto
         if (!( rows[0].password == password)){
             console.log("Wrong password ");
-            return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart')); // create the loginMessage and save it to session as flashdata
+            return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart'));
         };
 
-        // all is well, return successful user
+        // todo bien, devolvemos user
         return done(null, rows[0]);
     });
   }));
