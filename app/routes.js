@@ -32,7 +32,7 @@ module.exports = function(app, passport) {
     });
 
     app.get('/dashboard', function(req, res) {
-        console.log("GET SIGNUP");
+        console.log("GET DASHBOARD");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
 
@@ -58,11 +58,11 @@ module.exports = function(app, passport) {
     // =====================================
     // Pagina protegida.. por lo tanto deben estar logeados para visitarla
     // isLoggedIn function
-    app.get('/dashboard', isLoggedIn, function(req, res) {
+    /*app.get('/dashboard', isLoggedIn, function(req, res) {
         res.render('dashboard.ejs', {
             user : req.user // obtener el user de la sesion y pasarla al template
         });
-    });
+    });*/
 
     // =====================================
     // LOGOUT ==============================

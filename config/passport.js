@@ -115,7 +115,6 @@ module.exports = function(passport) {
     });
         // Buscar el email en la base de datos
 
-
     }));
 
 };
