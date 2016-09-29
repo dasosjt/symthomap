@@ -78,7 +78,7 @@ module.exports = function(app, passport) {
       });
       var temp;
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
-        temp = rows;
+        temp = rows[0].name;
         console.log("Name ", rows[0].name);
         console.log("ROWS FKFKFKFKFKF ",rows);
         if (err) {
