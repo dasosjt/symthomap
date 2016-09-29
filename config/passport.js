@@ -33,7 +33,7 @@ module.exports = function(passport) {
             connection.release();
               done(err, rows[0]);
           });
-        };
+        });
     });
 
     // =========================================================================
@@ -74,7 +74,7 @@ module.exports = function(passport) {
             });
           };
         });
-      };
+      });
     }));
 
     // =========================================================================
@@ -111,6 +111,6 @@ module.exports = function(passport) {
           // todo bien, devolvemos user
           return done(null, rows[0]);
       });
-    };
+    });
   }));
 };

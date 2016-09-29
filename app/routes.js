@@ -90,7 +90,7 @@ module.exports = function(app, passport) {
             console.log("rows of get Patient are undefined");
           }
         });
-      };
+      });
     });
 
     // procesar el signup form
