@@ -12,6 +12,9 @@ var mysql           = require('mysql');
 var dbconfig        = require('../config/databaseSQL.js');
 
 var connection      = mysql.createConnection(dbconfig);
+connection.on('error', function(err) {
+  console.log(err.code); // 'ER_BAD_DB_ERROR'
+});
 
 module.exports = function(passport) {
 
