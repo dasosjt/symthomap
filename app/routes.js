@@ -86,9 +86,9 @@ module.exports = function(app, passport) {
         if(!rows.length){
           console.log("Rows get /patient undefined");
         } else {
-          temp = rows[0].name;
+          temp = rows;
           res.setHeader('Content-Type', 'application/json');
-          res.send(JSON.stringify({ a: temp }));
+          res.send(JSON.stringify({ patients : temp }));
         }
         if (err) {
           console.log(err);
