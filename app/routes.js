@@ -18,18 +18,18 @@ module.exports = function(app, passport) {
     // =====================================
     // ANGULAR ROUTES  =====================
     // =====================================
-    app.get('*', function(req, res) {
-        console.log("ANGULAR");
+    app.get('/', function(req, res) {
+        console.log("GET /");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
-    /*app.get('/login', function(req, res) {
+    app.get('/login', function(req, res) {
         console.log("GET LOGIN");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
     app.get('/signup', function(req, res) {
         console.log("GET SIGNUP");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
-    });*/
+    });
 
     // =====================================
     // LOGIN ===============================
@@ -78,7 +78,7 @@ module.exports = function(app, passport) {
       });
       var temp;
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
-        temp = rows[0].name;
+        temp = rows[0];
         console.log("Name ", rows[0].name);
         console.log("ROWS FKFKFKFKFKF ",rows);
         if (err) {
