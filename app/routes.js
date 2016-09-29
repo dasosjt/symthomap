@@ -18,18 +18,18 @@ module.exports = function(app, passport) {
     // =====================================
     // ANGULAR ROUTES  =====================
     // =====================================
-    app.get('/', function(req, res) {
-        console.log("GET /");
+    app.get('*', function(req, res) {
+        console.log("ANGULAR");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
-    app.get('/login', function(req, res) {
+    /*app.get('/login', function(req, res) {
         console.log("GET LOGIN");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
     app.get('/signup', function(req, res) {
         console.log("GET SIGNUP");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
-    });
+    });*/
 
     // =====================================
     // LOGIN ===============================
