@@ -104,33 +104,6 @@ module.exports = function(app, passport) {
      failureRedirect : '/login', // redirige a login por el error
      failureFlash : true // permitir flash messages
    }));
-
-   //Llamando BD prueba
-   app.get('/get', function(req, res) {
-      con.connect(function(err){
-        if(err){
-          console.log('Error connecting to Db');
-          return;
-        }
-        console.log('Connection established');
-        console.log('Connected as id ' + con.threadId);
-        });
-
-      con.query('SELECT * FROM heroku_03080da74f6c5f8.patient;', function(err, rows, fields) {
-        if (err) throw err;
-
-        console.log('Patient: ', rows);
-      });
-
-      con.end(function(err) {
-        // The connection is terminated gracefully
-        // Ensures all previously enqueued queries are still
-        // before sending a COM_QUIT packet to the MySQL server.
-      });
-   });
-
-    // procesar ingresar nuevo usuario
-    app.post('/dashboard',createPatient);
 };
 
 // verificar si esta logeado
@@ -142,24 +115,4 @@ function isLoggedIn(req, res, next) {
 
     // si no esta, entonces redirigir al home
     res.redirect('/');
-}
-
-function createPatient(req, res, next) {
-
-  // creamos al paciente
-  var newPatient = new Patient();
-
-  // ingresamos los valores del paciente
-  newPatient.patient.name = req.param('name');
-  newPatient.patient.email = req.param('email');
-  newPatient.patient.dir = req.param('dir');
-  newPatient.patient.symptoms = req.param('symptoms');
-
-  // guardamos el usuario
-  newPatient.save(function(err) {
-    if (err)
-      res.send(err);
-
-    res.redirect('/dashboard');
-  });
 }
