@@ -11,10 +11,7 @@ var mysql           = require('mysql');
 
 var dbconfig        = require('../config/databaseSQL.js');
 
-var connection      = mysql.createConnection(dbconfig);
-connection.on('error', function(err) {
-  console.log(err.code); // 'ER_BAD_DB_ERROR'
-});
+var pool      = mysql.createPool(dbconfig);
 
 module.exports = function(passport) {
 
@@ -31,9 +28,12 @@ module.exports = function(passport) {
     //deserialize el usuario
     passport.deserializeUser(function(email, done) {
         console.log("deserializeUser ", email);
-        connection.query("select * from heroku_03080da74f6c5f8.user where email = '"+email+"'",function(err,rows){
-            done(err, rows[0]);
-        });
+        pool.getConnection(function(err, connection) {
+          connection.query("select * from heroku_03080da74f6c5f8.user where email = '"+email+"'",function(err,rows){
+            connection.release();
+              done(err, rows[0]);
+          });
+        };
     });
 
     // =========================================================================
@@ -48,30 +48,33 @@ module.exports = function(passport) {
         passReqToCallback : true // se envia todo el request
     },
     function(req, email, password, done) {
-      connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows) {
-        console.log(rows);
-        if (err) {
-          console.log(err);
-          return done(err);
-        };
-        if(rows.length != 0){
-          return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
-        } else {
-          console.log(req.param('email'));
-          var newUserMysql = new Object();
-          newUserMysql.email = email;
-          newUserMysql.password = password;
-          newUserMysql.user_type = req.param('user_type');
-          var user = {name: email, email: email, password: password, user_type: req.param('user_type')};
-          connection.query('INSERT INTO heroku_03080da74f6c5f8.user SET ? ', user, function(err, result) {
-            if (err) {
-              console.log(err);
-              return done(err);
-            };
-            return done(null, newUserMysql);
-          });
-        };
-      });
+      pool.getConnection(function(err, connection) {
+        connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE user.email = '"+email+"';", function(err, rows) {
+          console.log(rows);
+          if (err) {
+            console.log(err);
+            return done(err);
+          };
+          if(rows.length != 0){
+            return done(null, false, req.flash('signupMessage', 'El correo ingresado ya existe'));
+          } else {
+            console.log(req.param('email'));
+            var newUserMysql = new Object();
+            newUserMysql.email = email;
+            newUserMysql.password = password;
+            newUserMysql.user_type = req.param('user_type');
+            var user = {name: email, email: email, password: password, user_type: req.param('user_type')};
+            connection.query('INSERT INTO heroku_03080da74f6c5f8.user SET ? ', user, function(err, result) {
+              connection.release();
+              if (err) {
+                console.log(err);
+                return done(err);
+              };
+              return done(null, newUserMysql);
+            });
+          };
+        });
+      };
     }));
 
     // =========================================================================
@@ -87,24 +90,27 @@ module.exports = function(passport) {
 
     },
     function(req, email, password, done) { // callback con nuestra form
-      connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE email = '" + email + "'",function(err,rows){
-        if (err) {
-          return done(err);
-        };
-        console.log(rows);
-        console.log("above row object");
-        if (!rows.length) {
-          console.log("No user found ");
-          return done(null, false, req.flash('loginMessage', 'No user found.'));
-        };
-        // Si el usuario se encuentra pero el password es incorrecto
-        if (!( rows[0].password == password)){
-            console.log("Wrong password ");
-            return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart'));
-        };
+      pool.getConnection(function(err, connection) {
+        connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE email = '" + email + "'",function(err,rows){
+          connection.release();
+          if (err) {
+            return done(err);
+          };
+          console.log(rows);
+          console.log("above row object");
+          if (!rows.length) {
+            console.log("No user found ");
+            return done(null, false, req.flash('loginMessage', 'No user found.'));
+          };
+          // Si el usuario se encuentra pero el password es incorrecto
+          if (!( rows[0].password == password)){
+              console.log("Wrong password ");
+              return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart'));
+          };
 
-        // todo bien, devolvemos user
-        return done(null, rows[0]);
-    });
+          // todo bien, devolvemos user
+          return done(null, rows[0]);
+      });
+    };
   }));
 };

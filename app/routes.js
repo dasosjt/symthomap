@@ -7,10 +7,7 @@ var app      = express();
 var mysql           = require('mysql');
 var dbconfig        = require('../config/databaseSQL.js');
 
-var connection = mysql.createConnection(dbconfig);
-connection.on('error', function(err) {
-  console.log(err.code); // 'ER_BAD_DB_ERROR'
-});
+var pool = mysql.createPool(dbconfig);
 
 module.exports = function(app, passport) {
 
@@ -76,21 +73,24 @@ module.exports = function(app, passport) {
     // =====================================
     // Get all the patients
     app.get('/patient', isLoggedIn,  function(req, res){
-      connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
-        if(rows){
-          if(!rows.length){
+      pool.getConnection(function(err, connection) {
+        connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
+          connection.release();
+          if(rows){
+            if(!rows.length){
+            } else {
+              res.setHeader('Content-Type', 'application/json');
+              res.send(JSON.stringify({ patients : rows }));
+            }
+            if (err) {
+              console.log(err);
+              return done(err);
+            };
           } else {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify({ patients : rows }));
+            console.log("rows of get Patient are undefined");
           }
-          if (err) {
-            console.log(err);
-            return done(err);
-          };
-        } else {
-          console.log("rows of get Patient are undefined");
-        }
-      });
+        });
+      };
     });
 
     // procesar el signup form
