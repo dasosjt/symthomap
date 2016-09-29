@@ -3,9 +3,8 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $ht
   $scope.tagline = {};
   $http.get('/patient')
       .success(function(data) {
-          $scope.tagline = data;
+          $scope.tagline = data.a;
           console.log(data.a);
-          console.log($scope.tagline);
       })
       .error(function(data) {
           console.log('Error: ' + data);
