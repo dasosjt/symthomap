@@ -88,7 +88,7 @@ module.exports = function(app, passport) {
       });
       //res.send(temp);
       res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify({ a: temp }));
+      res.send(JSON.stringify({ a: temp.name }));
     });
 
     // procesar el signup form
