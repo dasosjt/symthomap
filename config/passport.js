@@ -20,7 +20,6 @@ module.exports = function(passport) {
 
     //serialize el usuario
     passport.serializeUser(function(user, done) {
-        console.log("HELODOSAPFKDSPFJSPAJFPSKDFPDSKFPSDF");
         console.log("serialize ", user.email);
         done(null, user.email);
     });
@@ -101,7 +100,7 @@ module.exports = function(passport) {
       if (err)
                 return done(err);
        if (!rows.length) {
-                console.log("No user found. ");
+                console.log("No user found ");
                 return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
             }
 
