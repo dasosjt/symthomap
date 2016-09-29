@@ -81,8 +81,6 @@ module.exports = function(app, passport) {
         temp = rows[0].name;
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({ a: temp }));
-        /*console.log("Name ", rows[0].name);
-        console.log("ROWS FKFKFKFKFKF ",rows);*/
         if (err) {
           console.log(err);
           return done(err);
