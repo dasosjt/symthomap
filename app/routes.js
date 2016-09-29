@@ -79,16 +79,15 @@ module.exports = function(app, passport) {
       var temp;
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
         temp = rows[0].name;
-        console.log("Name ", rows[0].name);
-        console.log("ROWS FKFKFKFKFKF ",rows);
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({ a: temp }));
+        /*console.log("Name ", rows[0].name);
+        console.log("ROWS FKFKFKFKFKF ",rows);*/
         if (err) {
           console.log(err);
           return done(err);
         };
       });
-      //res.send(temp);
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify({ a: 1 }));
     });
 
     // procesar el signup form
