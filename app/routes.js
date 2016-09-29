@@ -73,14 +73,14 @@ module.exports = function(app, passport) {
     // =====================================
     // Get all the patients
     app.get('/patient', isLoggedIn,  function(req, res){
-      pool.getConnection(function(err, connection) {
-        connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
+      pool.getConnection(function(err, connection) { //Creamos un pool de conexiones que serán reutilizadas, es importante!
+        connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) { //Hacemos los queries tipo normal
           connection.release();
           if(rows){
             if(!rows.length){
             } else {
-              res.setHeader('Content-Type', 'application/json');
-              res.send(JSON.stringify({ patients : rows }));
+              res.setHeader('Content-Type', 'application/json'); //Colocamos el header de tipo JSON
+              res.send(JSON.stringify({ patients : rows })); //Mandamos el json para Koch y Dieguito
             }
             if (err) {
               console.log(err);
