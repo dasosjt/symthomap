@@ -83,14 +83,19 @@ module.exports = function(app, passport) {
       });
       var temp;
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
-        temp = rows[0].name;
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ a: temp }));
+        if(!rows.length){
+          console.log("Rows get /patient undefined");
+        } else {
+          temp = rows[0].name;
+          res.setHeader('Content-Type', 'application/json');
+          res.send(JSON.stringify({ patients: temp }));
+        }
         if (err) {
           console.log(err);
           return done(err);
         };
       });
+      connection.destroy();
     });
 
     // procesar el signup form
