@@ -20,14 +20,14 @@ module.exports = function(passport) {
 
     //serialize el usuario
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+        done(null, user.email);
     });
 
     //deserialize el usuario
-    passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
-        });
+    passport.deserializeUser(function(email, done) {
+  		connection.query("select * from heroku_03080da74f6c5f8.user where email = ''"+email+"''",function(err,rows){
+  			done(err, rows[0]);
+  		});
     });
 
     // =========================================================================
@@ -83,26 +83,26 @@ module.exports = function(passport) {
         usernameField : 'email',
         passwordField : 'password',
         passReqToCallback : true // vamos a pasar todo el req
+
     },
     function(req, email, password, done) { // callback con nuestra form
-
-        // Buscar el email en la base de datos
-        User.findOne({ 'local.email' :  email }, function(err, user) {
-            // Si existe algun error entonces devolvemos el error
-            if (err)
+      connection.query("SELECT * FROM heroku_03080da74f6c5f8.user WHERE email = '" + email + "'",function(err,rows){
+      if (err)
                 return done(err);
+       if (!rows.length) {
+                return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+            }
 
-            // Si no se encuentra un user entonces devolvemos mensaje
-            if (!user)
-                return done(null, false, req.flash('loginMessage', 'No existe el usuario.'));
+      // if the user is found but the password is wrong
+            if (!( rows[0].password == password))
+                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
-            // Si encontramos al user pero el password esta mal
-            if (!user.validPassword(password))
-                return done(null, false, req.flash('loginMessage', 'Password incorrecto'));
+            // all is well, return successful user
+            return done(null, rows[0]);
 
-            // todo bien, devolvemos eso.
-            return done(null, user);
-        });
+    });
+        // Buscar el email en la base de datos
+
 
     }));
 
