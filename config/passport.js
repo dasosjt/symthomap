@@ -21,13 +21,14 @@ module.exports = function(passport) {
     //serialize el usuario
     passport.serializeUser(function(user, done) {
         console.log("HELODOSAPFKDSPFJSPAJFPSKDFPDSKFPSDF");
-        console.log(user.email);
+        console.log("serialize ", user.email);
         done(null, user.email);
     });
 
     //deserialize el usuario
     passport.deserializeUser(function(email, done) {
       var connection = mysql.createConnection(dbconfig);
+      console.log("deserialize ", email);
       connection.on('error', function(err) {
         console.log(err.code); // 'ER_BAD_DB_ERROR'
       });
