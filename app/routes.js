@@ -79,13 +79,13 @@ module.exports = function(app, passport) {
       var temp;
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
         temp = rows;
-        console.log(rows);
+        console.log("ROWS FKFKFKFKFKF ",rows);
         if (err) {
           console.log(err);
           return done(err);
         };
       });
-      res.send(temp[0]);
+      res.send(temp);
     });
 
     // procesar el signup form
