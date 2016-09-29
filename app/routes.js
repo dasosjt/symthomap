@@ -94,8 +94,8 @@ module.exports = function(app, passport) {
           console.log(err);
           return done(err);
         };
+        connection.destroy();
       });
-      connection.destroy();
     });
 
     // procesar el signup form
