@@ -75,7 +75,7 @@ module.exports = function(app, passport) {
     // patient =============================
     // =====================================
     // Get all the patients
-    app.get('/patient', function(req, res){
+    app.get('/patient', isLoggedIn,  function(req, res){
       connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient ", function(err, rows) {
         if(rows){
           if(!rows.length){
