@@ -88,7 +88,7 @@ module.exports = function(app, passport) {
         } else {
           temp = rows[0].name;
           res.setHeader('Content-Type', 'application/json');
-          res.send(JSON.stringify({ patients: temp }));
+          res.send(JSON.stringify({ a: temp }));
         }
         if (err) {
           console.log(err);
