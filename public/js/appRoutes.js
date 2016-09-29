@@ -9,6 +9,10 @@
             controller: 'MainController'
         })
 
+        .when('/dashboard', {
+            templateUrl: 'views/home.html',
+            controller: 'MainController'
+        })
 
         .when('/login', {
             templateUrl: 'views/nerd.html',
