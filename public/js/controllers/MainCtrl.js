@@ -1,14 +1,13 @@
 // public/js/controllers/MainCtrl.js
 angular.module('MainCtrl', []).controller('MainController', function($scope, $http) {
-  var patients = {};
+  $scope.tagline = {};
   $http.get('/patient')
       .success(function(data) {
-          patients = data;
+          $scope.tagline = data;
           console.log(data);
-          console.log("HIIIII");
+          console.log($scope.tagline);
       })
       .error(function(data) {
           console.log('Error: ' + data);
       });
-    $scope.tagline = patients.name;
 });
