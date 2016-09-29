@@ -87,7 +87,6 @@ module.exports = function(app, passport) {
         } else {
           console.log("rows of get Patient are undefined");
         }
-        connection.destroy();
       });
     });
 
