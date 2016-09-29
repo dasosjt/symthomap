@@ -20,7 +20,7 @@ module.exports = function(passport) {
 
     //serialize el usuario
     passport.serializeUser(function(user, done) {
-        console.log("HELODOSAPFKDSPFJSPAJFPSKDFPDSKFPSDF")
+        console.log("HELODOSAPFKDSPFJSPAJFPSKDFPDSKFPSDF");
         done(null, user.email);
     });
 
@@ -30,7 +30,7 @@ module.exports = function(passport) {
       connection.on('error', function(err) {
         console.log(err.code); // 'ER_BAD_DB_ERROR'
       });
-  		connection.query("select * from heroku_03080da74f6c5f8.user where email = ''"+email+"''",function(err,rows){
+  		connection.query("select * from heroku_03080da74f6c5f8.user where email = '"+email+"'",function(err,rows){
   			done(err, rows[0]);
   		});
     });
