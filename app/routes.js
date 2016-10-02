@@ -93,6 +93,29 @@ module.exports = function(app, passport) {
       });
     });
 
+    app.get('/consultPatient', isLoggedIn,  function(req, res){
+        var idpatient = req.idpatient;
+        pool.getConnection(function(err, connection) { //Creamos un pool de conexiones que serán reutilizadas, es importante!
+            connection.query("SELECT * FROM heroku_03080da74f6c5f8.patient WHERE idpatient ="+idpatient, function(err, rows) { //Hacemos los queries tipo normal
+                connection.release();
+                if(rows){
+                    if(!rows.length){
+                    } else {
+                        res.setHeader('Content-Type', 'application/json'); //Colocamos el header de tipo JSON
+                        res.send(JSON.stringify({ patients : rows })); //Mandamos el json para Koch y Dieguito
+                    }
+                    if (err) {
+                        console.log(err);
+                        return done(err);
+                    };
+                } else {
+                    console.log("rows of get this specific Patient are undefined");
+                }
+            });
+        });
+    });
+
+
     // procesar el signup form
     app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/dashboard', // redirigir al dashboard
