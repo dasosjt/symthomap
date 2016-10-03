@@ -115,6 +115,28 @@ module.exports = function(app, passport) {
         });
     });
 
+    app.post('/insertPatient', isLoggedIn,  function(req, res ){
+        pool.getConnection(function(err, connection) { //Creamos un pool de conexiones que serán reutilizadas, es importante!
+            var name = req.param('name');
+            var email = req.param('email');
+            var dir = req.param('dir');
+            var patient = {name: name, email: email, dir: dir};
+            var newPatient = new Object();
+            newPatient.email = email;
+            newPatient.password = password;
+            newPatient.dir = dir;
+            connection.query('INSERT INTO heroku_03080da74f6c5f8.patient SET ? ', patient, function(err, result) {
+                connection.release();
+                if (err) {
+                    console.log(err);
+                    return done(err);
+                };
+                return done(null, newPatient);
+            });
+        });
+    });
+
+
 
     // procesar el signup form
     app.post('/signup', passport.authenticate('local-signup', {
