@@ -10,7 +10,7 @@
         })
 
         .when('/dashboard', {
-            templateUrl: 'views/home.html',
+            templateUrl: 'views/epidem.html',
             controller: 'MainController'
         })
 

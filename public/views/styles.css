@@ -1,3 +1,30 @@
+/* app css stylesheet */
+
+/*.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+.menu:before {
+  content: "[";
+}
+.menu:after {
+  content: "]";
+}
+.menu > li {
+  display: inline;
+}
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+*/
+
 body{
     background-color: #f1f1f1;
     font-family: Arial;
@@ -125,7 +152,7 @@ body{
 
 .Login__Form{
     position:absolute;
-    margin-top: 30px;
+    top: 25%;
     margin-left: 40%
 }
 
@@ -146,15 +173,139 @@ body{
 .Login__Form__Button{
     position: relative;
     padding: 10px;
+    top: 5px;
+    background-color: #f1f1f1;
+    color: black;
+    text-decoration-line: none;
     left: 50%;
-    border-radius: 20px
+    border-radius: 20px;
+    border-style:inset;
+    border-width: 1px;
 }
 
 .Login__Options{
     position: absolute;
     bottom: 10px;
+    height: 10%;
     border-top-style: solid;
     width: 100%;
     border-top-width: 2px;
     background-color: #f1f1f1
+}
+
+.Login__Form__User{
+    position: relative;
+    padding: 10px;
+    left: 80px;
+}
+.Recovery{
+    position: absolute;
+    display:block;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-width: 2px;
+    top: 100px;
+    height: 80%;
+    width: 100%;
+    background: #fafafa;
+}
+
+.Empty__Space{
+    position: absolute;
+    bottom: 10px;
+    height: 10%;
+    border-top-style: solid;
+    width: 100%;
+    border-top-width: 2px;
+    background-color: #f2f2f2;
+}
+
+.EpidemBoard__AlertView{
+    position: absolute;
+    display:block;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-width: .5px;
+    top: 100px;
+    height: 80%;
+    width: 100%;
+    background: #fafafa;
+}
+
+.EpidemBoard__AlertView__Table{
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+    border-spacing: 5px;
+}
+
+.EpidemBoard__InboxView{
+    position: absolute;
+    border-style: solid;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-width: .5px;
+    top: 100px;
+    height: 80%;
+    width: 100%;
+    background: #fafafa;
+}
+
+.EpidemBoard__InboxView__Table{
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+    border-spacing: 5px;
+}
+
+.UserBox{
+    position: absolute;
+    right: 5px;
+    top: 22px;
+    background-color: red;
+    opacity:0.95;
+    height: 500px;
+    width: 250px;
+}
+
+.Selection{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-top-style: solid;
+    border-width: 0.5px;
+    background-color: white;
+}
+
+.selText{
+    font-size: xx-large;
+    font-weight: bold;
+    width: 550px;
+    margin: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.loadingWheel{
+    background-color: grey;
+    height: 64px;
+    width: 64px;
+    margin: auto;
+    border-radius: 50px;
+}
+
+.confirmation{
+    position: absolute;
+    height: 90%;
+    width: 100%;
+    border-top-style: solid;
+    border-width: 0.5px;
+    background-color: white;
 }
