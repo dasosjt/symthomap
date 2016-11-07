@@ -30,7 +30,8 @@ module.exports = function(app, passport) {
     app.get('/dashboard', isLoggedIn,  function(req, res) {
         console.log("GET DASHBOARD");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
-        res.send(user: req.user);
+        res.setHeader('Content-Type', 'application/json'); //Colocamos el header de tipo JSON
+        res.send(JSON.stringify({ user : req.user })); //Mandamos el json para Koch y Dieguito
     });
 
     // =====================================
