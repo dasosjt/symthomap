@@ -11,4 +11,11 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
         .error(function(data) {
             console.log('Error: ' + data);
         });
+    $http.get('/dashboard/user')
+        .success(function(data) {
+            console.log(data.user);
+        })
+        .error(function(data) {
+            console.log('Error: ' + data);
+        });
 });
