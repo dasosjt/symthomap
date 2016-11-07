@@ -64,7 +64,9 @@ module.exports = function(passport) {
             console.log(req.param('email'));
             var newUserMysql = new Object();
             newUserMysql.email = email;
-            newUserMysql.password = bcrypt.hashSync(password);
+            var hash = bcrypt.hashSync(password);
+            console.log(hash);
+            newUserMysql.password = hash;
             newUserMysql.user_type = req.param('user_type');
             var user = {name: newUserMysql.email, email: email, password: password, user_type: newUserMysql.user_type};
             connection.query('INSERT INTO heroku_03080da74f6c5f8.user SET ? ', user, function(err, result) {
@@ -106,7 +108,7 @@ module.exports = function(passport) {
             return done(null, false, req.flash('loginMessage', 'No user found.'));
           };
           // Si el usuario se encuentra pero el password es incorrecto
-          if (!( bcrypt.compareSync(rows[0].password, password))){
+          if (!( rows[0].password == password)){
               console.log("Wrong password ");
               return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart'));
           };
