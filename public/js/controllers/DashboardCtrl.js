@@ -18,4 +18,37 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
         .error(function(data) {
             console.log('Error: ' + data);
         });
+    $scope.map = {center: {latitude: 14.6284, longitude: -90.5227 }, zoom: 4, bounds: {}};
+    $scope.polygons = [
+        {
+            id: 1,
+
+            path: [
+                {
+                    latitude: 14.0138,
+                    longitude: -91.2867
+                },
+                {
+                    latitude: 15.9621,
+                    longitude: -91.2867
+                },
+                {
+                    latitude: 15.5144,
+                    longitude: -90.237297
+                }
+            ],
+            stroke: {
+                color: '#6060FB',
+                weight: 3
+            },
+            editable: true,
+            draggable: true,
+            geodesic: false,
+            visible: true,
+            fill: {
+                color: '#ff0000',
+                opacity: 0.8
+            }
+        }
+    ];
 });

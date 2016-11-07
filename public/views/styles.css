@@ -309,3 +309,21 @@ body{
     border-width: 0.5px;
     background-color: white;
 }
+
+#map_canvas {
+    height: 20%;
+    width: 20%;
+    margin: 20px;
+}
+
+#map_canvas {
+    position: relative;
+}
+
+.angular-google-map-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
