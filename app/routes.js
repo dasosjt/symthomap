@@ -30,6 +30,7 @@ module.exports = function(app, passport) {
     app.get('/dashboard', isLoggedIn,  function(req, res) {
         console.log("GET DASHBOARD");
         res.sendfile('./public/views/index.html'); // cargar index html para Angular
+        res.send(user: req.user);
     });
 
     // =====================================
