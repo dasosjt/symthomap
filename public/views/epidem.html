@@ -37,6 +37,12 @@
 
             <div class="EpidemBoard__MainView__Map" id="map">
                 Showing Map:
+                <div id="map_canvas" ng-controller="DashboardController">
+                    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+                        <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
+                                         geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="p.draggable"></ui-gmap-polygon>
+                    </ui-gmap-google-map>
+                </div>
             </div>
 
             <div class="EpidemBoard__MainView__SympthomList">
@@ -53,12 +59,7 @@
                         <td>San Jose Pinula, Guatemala</td>
                     </tr>
                     <tr>
-                        <div id="map_canvas" ng-controller="DashboardController">
-                            <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-                                <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
-                                                 geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="p.draggable"></ui-gmap-polygon>
-                            </ui-gmap-google-map>
-                        </div>
+
                         <td>...</td>
                         <td>...</td>
                     </tr>
