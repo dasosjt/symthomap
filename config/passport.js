@@ -65,7 +65,7 @@ module.exports = function(passport) {
             var newUserMysql = new Object();
             newUserMysql.email = email;
             var hash = bcrypt.hashSync(password);
-            console.log(hash);
+            console.log("Hashed password ", hash);
             newUserMysql.password = hash;
             newUserMysql.user_type = req.param('user_type');
             var user = {name: newUserMysql.email, email: email, password: password, user_type: newUserMysql.user_type};
