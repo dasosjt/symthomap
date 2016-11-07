@@ -68,7 +68,7 @@ module.exports = function(passport) {
             console.log("Hashed password ", hash);
             newUserMysql.password = hash;
             newUserMysql.user_type = req.param('user_type');
-            var user = {name: newUserMysql.email, email: email, password: password, user_type: newUserMysql.user_type};
+            var user = {name: newUserMysql.email, email: email, password: hash, user_type: newUserMysql.user_type};
             connection.query('INSERT INTO heroku_03080da74f6c5f8.user SET ? ', user, function(err, result) {
               connection.release();
               if (err) {
