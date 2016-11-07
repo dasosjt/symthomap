@@ -111,12 +111,10 @@ module.exports = function(passport) {
 
           if(bcrypt.compareSync(password, rows[0].password)){
             console.log("SAME PASSWORD");
-          }
-          if (!( rows[0].password == password)){
-              console.log("Wrong password ");
-              return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart'));
+          }else{
+            console.log("Wrong password ");
+            return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart'));
           };
-
           // todo bien, devolvemos user
           return done(null, rows[0]);
       });
