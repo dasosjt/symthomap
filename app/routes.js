@@ -6,6 +6,7 @@ var express  = require('express');
 var app      = express();
 var mysql           = require('mysql');
 var dbconfig        = require('../config/databaseSQL.js');
+var current_user    = {};
 
 var pool = mysql.createPool(dbconfig);
 
@@ -29,7 +30,8 @@ module.exports = function(app, passport) {
 
     app.get('/dashboard', isLoggedIn,  function(req, res) {
         console.log("GET DASHBOARD");
-        res.sendfile('./public/views/index.html', { user : req.user }); // cargar index html para Angular
+        current_user = req.user;
+        res.sendfile('./public/views/index.html'); // cargar index html para Angular
     });
 
     // =====================================
@@ -59,7 +61,10 @@ module.exports = function(app, passport) {
             user : req.user // obtener el user de la sesion y pasarla al template
         });
     });*/
-
+    app.get('/dashboard/user', isLoggedIn, function(req, res) {
+      res.setHeader('Content-Type', 'application/json'); //Colocamos el header de tipo JSON
+      res.send(JSON.stringify({ user : current_user })); //Mandamos el json para Koch y Dieguito
+    });
     // =====================================
     // LOGOUT ==============================
     // =====================================
