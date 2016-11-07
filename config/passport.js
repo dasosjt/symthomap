@@ -106,17 +106,17 @@ module.exports = function(passport) {
           if (!rows.length) {
             console.log("No user found ");
             return done(null, false, req.flash('loginMessage', 'No user found.'));
-          };
-          // Si el usuario se encuentra pero el password es incorrecto
-
-          if(bcrypt.compareSync(password, rows[0].password)){
-            console.log("SAME PASSWORD");
           }else{
-            console.log("Wrong password ");
-            return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart'));
+            if(bcrypt.compareSync(password, rows[0].password)){
+              console.log("SAME PASSWORD");
+              // todo bien, devolvemos user
+              return done(null, rows[0]);
+            }else{
+              console.log("Wrong password ");
+              return done(null, false, req.flash('loginMessage', 'Oops! I did again to your heart'));
+            };
           };
-          // todo bien, devolvemos user
-          return done(null, rows[0]);
+        return done(null, false, req.flash('loginMessage', 'No user found.'));
       });
     });
   }));
