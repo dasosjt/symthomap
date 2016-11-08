@@ -63,7 +63,6 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
             }
         }
     ];
-    if
     /*$scope.flipMode = function (id) {
         $scope.things.forEach(function (thing) {
             if(id == thing.id){
