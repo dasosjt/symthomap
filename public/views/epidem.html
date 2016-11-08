@@ -1,3 +1,4 @@
+
 <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
@@ -23,62 +24,72 @@
 <link rel="stylesheet" href="styles.css">
 
 <h1 class= "Title">Sympthomapp</h1>
-<div class="EpidemBoard">
-    <button class="EpidemBoard__AccountBlock">nombre_usuario [imagen]</button>
 
-    <div class="EpidemBoard__Buttons">
-        <button class="EpidemBoard__Buttons__Main"> Pantalla Principal </button>
-        <button class="EpidemBoard__Buttons__Alerts"> Alertas [x] </button>
-        <button class="EpidemBoard__Buttons__Inbox"> Bandeja de entrada [x]</button>
-    </div>
-    <div class="EpidemBoard__MainView">
-        Bienvenido a su dashboard.
-        <div class="EpidemBoard__MainViewBox">
+<div ng-show="isMedic">
+    <h2>Soy Medico</h2>
+</div>
 
-            <div class="EpidemBoard__MainView__Map" id="map">
-                Showing Map:
-                <div id="map_canvas" ng-app="DashboardCtrl" ng-controller="DashboardController">
-                    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
-                        <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
-                                         geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="p.draggable"></ui-gmap-polygon>
-                    </ui-gmap-google-map>
+<div ng-show="isAdmin">
+    <h2>Soy Admin</h2>
+</div>
+<div ng-show="isEpidem" >
+    <div class="EpidemBoard">
+        <button class="EpidemBoard__AccountBlock">nombre_usuario [imagen]</button>
+
+        <div class="EpidemBoard__Buttons">
+            <button class="EpidemBoard__Buttons__Main"> Pantalla Principal </button>
+            <button class="EpidemBoard__Buttons__Alerts"> Alertas [x] </button>
+            <button class="EpidemBoard__Buttons__Inbox"> Bandeja de entrada [x]</button>
+        </div>
+        <div class="EpidemBoard__MainView">
+            Bienvenido a su dashboard.
+            <div class="EpidemBoard__MainViewBox">
+
+                <div class="EpidemBoard__MainView__Map" id="map">
+                    Showing Map:
+                    <div id="map_canvas" ng-app="DashboardCtrl" ng-controller="DashboardController">
+                        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+                            <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
+                                             geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="p.draggable"></ui-gmap-polygon>
+                        </ui-gmap-google-map>
+                    </div>
                 </div>
-            </div>
 
-            <div class="EpidemBoard__MainView__SympthomList">
+                <div class="EpidemBoard__MainView__SympthomList">
 
-                <button class="EpidemBoard__MainView__SymtphomList__SummaryButton">Resumir Datos</button>
+                    <button class="EpidemBoard__MainView__SymtphomList__SummaryButton">Resumir Datos</button>
 
-                <table class="EpidemBoard__MainView__SymtphomListbox">
-                    <tr class="EpidemBoard_MainView__SymtphomListbox_Headers">
-                        <th>Sintoma</th>
-                        <th>Posicion Geografica</th>
-                    </tr>
-                    <tr>
-                        <td>Diarrea</td>
-                        <td>San Jose Pinula, Guatemala</td>
-                    </tr>
-                    <tr>
+                    <table class="EpidemBoard__MainView__SymtphomListbox">
+                        <tr class="EpidemBoard_MainView__SymtphomListbox_Headers">
+                            <th>Sintoma</th>
+                            <th>Posicion Geografica</th>
+                        </tr>
+                        <tr>
+                            <td>Diarrea</td>
+                            <td>San Jose Pinula, Guatemala</td>
+                        </tr>
+                        <tr>
 
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                </table>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="EpidemBoard__AlertView" style= "display:none">
-        Esto no se deberia mostrar!*
-        <ul class="EpidemBoard__AlertView__List">Lista de alertas</ul>
-        <button class="EpidemBoard_AlertView_CreateAlert">Crear alerta</button>
-    </div>
+        <div class="EpidemBoard__AlertView" style= "display:none">
+            Esto no se deberia mostrar!*
+            <ul class="EpidemBoard__AlertView__List">Lista de alertas</ul>
+            <button class="EpidemBoard_AlertView_CreateAlert">Crear alerta</button>
+        </div>
 
-    <div class="EpidemBoard__InboxView" style= "display:none">
-        Esto no se deberia mostrar!*
-        <ul class="EpidemBoard__InboxView__List">Lista de correos</ul>
-        <button class="EpidemBoard__InboxView__Send">Enviar Correo</button>
+        <div class="EpidemBoard__InboxView" style= "display:none">
+            Esto no se deberia mostrar!*
+            <ul class="EpidemBoard__InboxView__List">Lista de correos</ul>
+            <button class="EpidemBoard__InboxView__Send">Enviar Correo</button>
+        </div>
     </div>
 </div>
 

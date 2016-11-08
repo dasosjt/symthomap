@@ -14,6 +14,18 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
     $http.get('/dashboard/user')
         .success(function(data) {
             console.log(data.user);
+            $scope.isAdmin = false;
+            $scope.isEpidem = false;
+            $scope.isMedic = false;
+            if(data.user.user_type == 1){
+                $scope.isEpidem = true;
+            }
+            if(data.user.user_type == 0){
+                $scope.isMedic = true;
+            }
+            if(data.user.user_type == 2){
+                $scope.isAdmin = true;
+            }
         })
         .error(function(data) {
             console.log('Error: ' + data);
@@ -51,7 +63,8 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
             }
         }
     ];
-    $scope.flipMode = function (id) {
+    if
+    /*$scope.flipMode = function (id) {
         $scope.things.forEach(function (thing) {
             if(id == thing.id){
                 thing.shown = true;
@@ -60,5 +73,5 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
                 thing.shown = false;
             }
         })
-    };
+    };*/
 });
