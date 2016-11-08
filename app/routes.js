@@ -128,7 +128,7 @@ module.exports = function(app, passport) {
             var patient = {name: name, email: email, dir: dir};
             var newPatient = new Object();
             newPatient.email = email;
-            newPatient.password = password;
+            newPatient.name = name;
             newPatient.dir = dir;
             connection.query('INSERT INTO heroku_03080da74f6c5f8.patient SET ? ', patient, function(err, result) {
                 connection.release();
