@@ -16,7 +16,7 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
             console.log(data.user);
             $scope.isAdmin = false;
             $scope.isEpidem = false;
-            $scope.isMedic = false;
+            $scope.isMedic = falxse;
             if(data.user.user_type == 1){
                 $scope.isEpidem = true;
             }
