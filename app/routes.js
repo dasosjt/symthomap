@@ -134,9 +134,11 @@ module.exports = function(app, passport) {
               connection.release();
               if (err) {
                 console.log(err);
-                done(err);
+                //done(err);
+                console.log(err);
               };
-              done(null, newPatient);
+              console.log("It worked");
+              res.end();
             });
         });
     });
