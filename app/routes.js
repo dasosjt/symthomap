@@ -138,6 +138,7 @@ module.exports = function(app, passport) {
                 console.log(err);
               };
               console.log("It worked");
+              res.redirect('/dashboard');
               res.end();
             });
         });
