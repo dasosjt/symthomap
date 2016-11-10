@@ -131,12 +131,12 @@ module.exports = function(app, passport) {
             newPatient.name = name;
             newPatient.dir = dir;
             connection.query('INSERT INTO heroku_03080da74f6c5f8.patient SET ? ', patient, function(err, result) {
-                connection.release();
-                if (err) {
-                    console.log(err);
-                    //return done(err);
-                };
-                //return done(null, newPatient);
+              connection.release();
+              if (err) {
+                console.log(err);
+                return done(err);
+              };
+              //return done(null, newPatient);
             });
         });
     });
