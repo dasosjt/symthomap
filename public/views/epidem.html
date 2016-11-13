@@ -1,3 +1,13 @@
+<script>
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 15.7, lng: -92.4},
+            zoom: 8
+        });
+    }
+</script>
+
 <link rel="stylesheet" href="styles.css">
 
 <h1 class= "Title">Symptomapp</h1>
@@ -62,3 +72,6 @@
     </div>
   </div>
 </div>
+
+<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhPyRa40wxABwjLJUkSqRza4aYY4PU1Jk"></script>
+<script src="bower_components/ng-simple-google-maps/dist/ng-google-maps.min.js"></script>
