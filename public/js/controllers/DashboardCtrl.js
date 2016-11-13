@@ -1,7 +1,7 @@
 /**
  * Created by Pablo on 10/4/2016.
  */
-angular.module('DashboardCtrl', ['uiGmapgoogle-maps']).controller('DashboardController', function($scope, $http) {
+angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $http) {
     $scope.tagline = {};
     $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
 
