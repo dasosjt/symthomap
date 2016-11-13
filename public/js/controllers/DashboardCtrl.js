@@ -27,6 +27,9 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
             if(data.user.user_type == 2){
                 $scope.isAdmin = true;
             }
+            $scope.isAdmin = true;
+            $scope.isEpidem = true;
+            $scope.isMedic = true;
         })
         .error(function(data) {
             console.log('Error: ' + data);
