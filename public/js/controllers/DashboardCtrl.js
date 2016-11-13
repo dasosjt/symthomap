@@ -1,7 +1,7 @@
 /**
  * Created by Pablo on 10/4/2016.
  */
-angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $http, NgMap) {
+angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $http) {
     $scope.tagline = {};
     $http.get('/patient')
         .success(function(data) {
@@ -31,10 +31,4 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
         .error(function(data) {
             console.log('Error: ' + data);
         });
-
-    NgMap.getMap().then(function(map) {
-        console.log(map.getCenter());
-        console.log('markers', map.markers);
-        console.log('shapes', map.shapes);
-    });
 });
