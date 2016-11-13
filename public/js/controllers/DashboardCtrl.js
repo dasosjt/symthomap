@@ -1,10 +1,10 @@
 /**
  * Created by Pablo on 10/4/2016.
  */
-angular.module('DashboardCtrl', ['uiGmapgoogle-maps']).controller('DashboardController', function($scope, $http) {
+angular.module('DashboardCtrl', ['uiGmapgoogle-maps']).controller('DashboardController', function($scope, $http, uiGmapgoogle-maps) {
     $scope.tagline = {};
     $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
-    
+
     $http.get('/patient')
         .success(function(data) {
             $scope.names = data.patients;
