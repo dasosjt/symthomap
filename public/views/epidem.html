@@ -84,17 +84,7 @@
         border: 1px solid #999;
     }
 </style>
-<div ng-controller="LayerHeatmapCtrl as vm">
-    <div id="panel">
-        <button ng-click="vm.toggleHeatmap()">Toggle Heatmap</button>
-        <button ng-click="vm.changeGradient()">Change gradient</button>
-        <button ng-click="vm.changeRadius()">Change radius</button>
-        <button ng-click="vm.changeOpacity()">Change opacity</button>
-    </div>
-    <ng-map zoom="13" center="37.774546, -122.433523" map-type-id="SATELLITE">
-        <heatmap-layer id="foo" data="coordinates"></heatmap-layer>
-    </ng-map>
-</div>
+
 <div ng-show="isAdmin">
   <div class="container">
     <div class="jumbotron text-left">
@@ -129,7 +119,17 @@
   <div class="container">
     <div class="jumbotron text-left">
       <h2>Soy Epidem</h2>
-
+        <div ng-controller="LayerHeatmapCtrl as vm">
+            <div id="panel">
+                <button ng-click="vm.toggleHeatmap()">Toggle Heatmap</button>
+                <button ng-click="vm.changeGradient()">Change gradient</button>
+                <button ng-click="vm.changeRadius()">Change radius</button>
+                <button ng-click="vm.changeOpacity()">Change opacity</button>
+            </div>
+            <ng-map zoom="13" center="37.774546, -122.433523" map-type-id="SATELLITE">
+                <heatmap-layer id="foo" data="coordinates"></heatmap-layer>
+            </ng-map>
+        </div>
     </div>
   </div>
 </div>
