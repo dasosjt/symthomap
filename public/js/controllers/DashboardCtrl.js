@@ -1,14 +1,9 @@
 /**
  * Created by Pablo on 10/4/2016.
  */
-angular.module('DashboardCtrl', ['ngGoogleMaps']).controller('DashboardController', function($scope, $http) {
+angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $http) {
     $scope.tagline = {};
 
-    $scope.mapOptions = {
-            center: {position: {lat: 43.9124, lng: 75.7873}},
-            zoom: 8
-        };
-    
     $http.get('/patient')
         .success(function(data) {
             $scope.names = data.patients;
