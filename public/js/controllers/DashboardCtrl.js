@@ -3,6 +3,7 @@
  */
 angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $http) {
     $scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWOoEU3mSAttNr4HYMEcgKGkrvZ05PZKo";
+
     $http.get('/patient')
         .success(function(data) {
             $scope.names = data.patients;
