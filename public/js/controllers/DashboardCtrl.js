@@ -3,11 +3,13 @@
  */
 angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $http, NgMap) {
     $scope.tagline = {};
+
     NgMap.getMap().then(function(map) {
       console.log(map.getCenter());
       console.log('markers', map.markers);
       console.log('shapes', map.shapes);
     });
+    
     $http.get('/patient')
         .success(function(data) {
             $scope.names = data.patients;
