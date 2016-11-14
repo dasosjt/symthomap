@@ -2,7 +2,6 @@
  * Created by Pablo on 10/4/2016.
  */
 angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $http, NgMap) {
-    $scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWOoEU3mSAttNr4HYMEcgKGkrvZ05PZKo";
     NgMap.getMap().then(function(map) {
       console.log(map.getCenter());
       console.log('markers', map.markers);
