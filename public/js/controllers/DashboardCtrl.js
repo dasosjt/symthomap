@@ -1,7 +1,7 @@
 /**
  * Created by Pablo on 10/4/2016.
  */
-angular.module('DashboardCtrl', ['ngMap']).controller('DashboardController', function($scope, $http) {
+angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $http) {
     $scope.tagline = {};
 
     /*NgMap.getMap().then(function(map) {
