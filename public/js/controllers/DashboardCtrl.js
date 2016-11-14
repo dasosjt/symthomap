@@ -3,7 +3,7 @@
  */
 angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $http) {
     $scope.tagline = {};
-
+    $scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWOoEU3mSAttNr4HYMEcgKGkrvZ05PZKo";
     /*NgMap.getMap().then(function(map) {
       console.log(map.getCenter());
       console.log('markers', map.markers);
