@@ -38,7 +38,7 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
         });
 });
 
-angular.module('DashboardCtrl', []).directive('myMap', function() {
+angular.module('DashboardCtrl', []).directive('DashboardCtrl', function() {
     // directive link function
     var link = function(scope, element, attrs) {
         var map, infoWindow;
