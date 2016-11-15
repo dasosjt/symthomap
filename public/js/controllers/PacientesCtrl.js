@@ -3,6 +3,4 @@
  */
 angular.module('PacientesCtrl', []).controller('PacientesController', function($scope) {
 
-    $scope.tagline = 'Epidemiologo';
-
 });

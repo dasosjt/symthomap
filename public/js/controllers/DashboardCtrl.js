@@ -1,8 +1,12 @@
 /**
  * Created by Pablo on 10/4/2016.
  */
-angular.module('DashboardCtrl', ['ngMap']).controller('DashboardController', function($scope, $http, NgMap) {
-    $scope.tagline = {};
+angular.module('DashboardCtrl', []).controller('DashboardController', function($scope, $http, NgMap) {
+    NgMap.getMap().then(function(map) {
+      console.log(map.getCenter());
+      console.log('markers', map.markers);
+      console.log('shapes', map.shapes);
+    });
     $http.get('/patient')
         .success(function(data) {
             $scope.names = data.patients;
@@ -11,6 +15,7 @@ angular.module('DashboardCtrl', ['ngMap']).controller('DashboardController', fun
         .error(function(data) {
             console.log('Error: ' + data);
         });
+
     $http.get('/dashboard/user')
         .success(function(data) {
             console.log(data.user);
@@ -26,18 +31,11 @@ angular.module('DashboardCtrl', ['ngMap']).controller('DashboardController', fun
             if(data.user.user_type == 2){
                 $scope.isAdmin = true;
             }
+            $scope.isAdmin = true;
+            $scope.isEpidem = true;
+            $scope.isMedic = true;
         })
         .error(function(data) {
             console.log('Error: ' + data);
-        });
-        var vm = this;
-        NgMap.getMap().then(function(map) {
-            vm.showCustomMarker= function(evt) {
-                map.customMarkers.foo.setVisible(true);
-                map.customMarkers.foo.setPosition(this.getPosition());
-            };
-            vm.closeCustomMarker= function(evt) {
-                this.style.display = 'none';
-            };
         });
 });
