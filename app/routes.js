@@ -127,13 +127,12 @@ module.exports = function(app, passport) {
             var dir = req.param('dir');
             var lat = req.param('lat');
             var long = req.param('long');
-            var patient = {name: name, email: email, lat: lat, long: long, dir: dir};
-            var newPatient = new Object();
+            var patient = {name: name, email: email, latitud: lat, longitud: long, dir: dir};
             newPatient.email = email;
             newPatient.name = name;
             newPatient.dir = dir;
-            newPatient.lat = lat;
-            newPatient.long = long;
+            newPatient.latitud = lat;
+            newPatient.longitud = long;
             connection.query('INSERT INTO heroku_03080da74f6c5f8.patient SET ? ', patient, function(err, result) {
               connection.release();
               if (err) {
