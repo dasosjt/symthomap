@@ -74,11 +74,19 @@
     <div class="jumbotron text-left">
       <h2>Soy Epidemiologo</h2>
         <body>
-        <table>
+        <table class = "table table-inverse">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Lugar</th>
+            </tr>
+          </thead>
+          <tbody>
             <tr ng-repeat="x in patients">
                 <td>{{ x.name }}</td>
                 <td>{{ x.dir }}</td>
             </tr>
+          </tbody>
         </table>
         <div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbyY1wV-t99MyrHaZe1i9uuDS6Cded3sk">
           <ng-map zoom="9" center="[14.6263757, -90.5626014]">
