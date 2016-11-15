@@ -83,7 +83,7 @@
         <div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbyY1wV-t99MyrHaZe1i9uuDS6Cded3sk">
           <ng-map zoom="11" center="[14.6263757, -90.5626014]">
             <marker position="14.6263757,-90.5626014" title="Desde Guatemala pal mundo!"></marker>
-            <marker position="{{x.latitud, x.longitud}}" ng-repeat="x in patients"></marker>
+            <marker position="{{x.latitud}}, {{x.longitud}}" ng-repeat="x in patients"></marker>
           </ng-map>
         </div>
       </body>
