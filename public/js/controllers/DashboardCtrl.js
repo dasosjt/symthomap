@@ -9,7 +9,7 @@ angular.module('DashboardCtrl', []).controller('DashboardController', function($
     });
     $http.get('/patient')
         .success(function(data) {
-            $scope.names = data.patients;
+            $scope.patients = data.patients;
             console.log(data.patients);
         })
         .error(function(data) {
