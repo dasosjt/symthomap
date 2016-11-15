@@ -128,6 +128,7 @@ module.exports = function(app, passport) {
             var lat = req.param('lat');
             var long = req.param('long');
             var patient = {name: name, email: email, latitud: lat, longitud: long, dir: dir};
+            console.log(patient);
             /*newPatient.email = email;
             newPatient.name = name;
             newPatient.dir = dir;
