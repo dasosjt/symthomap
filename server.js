@@ -4,7 +4,7 @@
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 8080;
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
 var morgan       = require('morgan');
@@ -15,7 +15,7 @@ var session      = require('express-session');
 var configDB = require('./config/database.js');
 
 // configuracion de mongoDB y passport =========================================
-mongoose.connect(configDB.url); // conexion a db
+// mongoose.connect(configDB.url); // conexion a db
 
 require('./config/passport')(passport); // configurar passport
 
