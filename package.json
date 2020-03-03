@@ -1,22 +1,21 @@
 {
-  "name" : "symthomap",
-  "description" : "App utilizada para Ingenieria de Software",
-  "main" : "server.js",
-  "repository" : "https://github.com/Link-djst/symtomap",
+  "name": "symthomap",
+  "description": "App utilizada para Ingenieria de Software",
+  "main": "server.js",
+  "repository": "https://github.com/dasosjt/symtomap",
   "license": "ISC",
-  "dependencies" : {
-    "mysql" : "~2.11.1",
-    "express" : "~4.0.0",
-    "mongoose" : "~3.8.1",
-    "passport" : "~0.1.17",
-    "passport-local" : "~0.1.6",
-    "connect-flash" : "~0.1.1",
-    "bcrypt-nodejs" : "latest",
-
-    "morgan": "~1.0.0",
-    "body-parser": "~1.0.0",
-    "cookie-parser": "~1.0.0",
-    "method-override": "~1.0.0",
-    "express-session": "~1.0.0"
+  "dependencies": {
+    "bcrypt-nodejs": "latest",
+    "body-parser": "^1.19.0",
+    "connect-flash": "~0.1.1",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.9.2",
+    "morgan": "^1.9.1",
+    "mysql": "^2.18.1",
+    "passport": "~0.1.17",
+    "passport-local": "~0.1.6"
   }
 }
